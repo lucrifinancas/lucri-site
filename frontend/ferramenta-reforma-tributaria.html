@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Simulador da Reforma Tributária para PMEs | Lucri Finanças Corporativas</title>
+  <meta name="description" content="Estime o impacto da Reforma Tributária no seu negócio. Compare a carga atual com o novo sistema CBS + IBS que entra em vigor em 2026." />
+  <link rel="icon" type="image/png" href="images/logo-simbolo.png" />
+  <link rel="canonical" href="https://lucrifinancas.com.br/ferramenta-reforma-tributaria.html" />
+  <meta property="og:type" content="website" />
+  <meta property="og:locale" content="pt_BR" />
+  <meta property="og:url" content="https://lucrifinancas.com.br/ferramenta-reforma-tributaria.html" />
+  <meta property="og:site_name" content="Lucri Finanças Corporativas" />
+  <meta property="og:title" content="Simulador da Reforma Tributária para PMEs | Lucri Finanças Corporativas" />
+  <meta property="og:description" content="Estime o impacto da Reforma Tributária no seu negócio. Compare a carga atual com o novo sistema CBS + IBS que entra em vigor em 2026." />
+  <meta property="og:image" content="https://lucrifinancas.com.br/images/founders.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="1500" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Simulador da Reforma Tributária para PMEs | Lucri Finanças Corporativas" />
+  <meta name="twitter:description" content="Estime o impacto da Reforma Tributária no seu negócio. Compare a carga atual com o novo sistema CBS + IBS que entra em vigor em 2026." />
+  <meta name="twitter:image" content="https://lucrifinancas.com.br/images/founders.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;600;700&family=Montserrat:wght@700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+  <style>
+    .ferr-hero { padding: 120px 0 64px; position: relative; display: flex; align-items: center; background: var(--bg); overflow: hidden; }
+    .ferr-hero-bg { position: absolute; inset: 0; background: radial-gradient(ellipse 80% 60% at 100% 100%, rgba(0,235,133,0.14) 0%, transparent 50%), var(--bg); }
+    .ferr-hero-overlay { position: absolute; inset: 0; background: linear-gradient(to right, rgba(1,1,22,0.7) 0%, rgba(1,1,22,0.3) 55%, transparent 100%); }
+    .ferr-hero-content { position: relative; z-index: 2; }
+    .ferr-breadcrumb { display: inline-flex; align-items: center; gap: 8px; font-size: 0.78rem; font-weight: 600; color: rgba(255,255,255,0.45); text-decoration: none; margin-bottom: 20px; transition: color 0.15s; }
+    .ferr-breadcrumb:hover { color: rgba(255,255,255,0.8); }
+    .ferr-tag { display: inline-block; font-size: 0.6rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.14em; color: var(--green); border: 1px solid rgba(0,235,133,0.3); padding: 4px 10px; border-radius: 4px; margin-bottom: 14px; }
+    .ferr-title { font-family: var(--font-brand); font-size: clamp(1.9rem, 4.2vw, 3.2rem); font-weight: 900; line-height: 1.08; letter-spacing: -0.02em; color: #fff; margin-bottom: 14px; text-wrap: balance; }
+    .ferr-sub { font-size: 0.95rem; color: var(--muted); line-height: 1.8; max-width: 480px; }
+
+    /* Calculator */
+    .ferr-calc-section { padding: 72px 0 96px; background: var(--bg-la); }
+    .ferr-calc-card {
+      max-width: 640px; margin: 0 auto;
+      background: #fff; border: 1px solid var(--border-l); border-radius: 20px;
+      overflow: hidden; box-shadow: 0 4px 32px rgba(40,38,30,0.07);
+    }
+    .ferr-calc-header { padding: 28px 32px 22px; border-bottom: 1px solid var(--border-l); }
+    .ferr-calc-header h2 { font-size: 1.05rem; font-weight: 800; color: var(--text-l); letter-spacing: -0.01em; margin-bottom: 4px; }
+    .ferr-calc-header p { font-size: 0.8rem; color: var(--muted-l); line-height: 1.65; }
+    .ferr-calc-body { padding: 26px 32px; display: flex; flex-direction: column; gap: 18px; }
+
+    .calc-field { display: flex; flex-direction: column; gap: 6px; }
+    .calc-field label { font-size: 0.64rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted-l); }
+    .calc-field .hint { font-size: 0.68rem; color: var(--muted-l); opacity: 0.75; margin-top: 4px; line-height: 1.5; }
+
+    .calc-input-wrap { display: flex; align-items: stretch; border: 1px solid var(--border-l); border-radius: var(--r); overflow: hidden; background: var(--bg-l); transition: border-color 0.18s; }
+    .calc-input-wrap:focus-within { border-color: var(--green-d); }
+    .calc-prefix, .calc-suffix { padding: 0 12px; font-size: 0.75rem; font-weight: 700; color: var(--muted-l); background: var(--bg-la); display: flex; align-items: center; user-select: none; }
+    .calc-prefix { border-right: 1px solid var(--border-l); }
+    .calc-suffix { border-left: 1px solid var(--border-l); }
+    .calc-input-wrap input, .calc-select {
+      flex: 1; min-width: 0; border: none; outline: none; background: transparent;
+      padding: 12px 14px; font-family: var(--font); font-size: 0.92rem;
+      font-weight: 600; color: var(--text-l);
+    }
+    .calc-select { width: 100%; border: 1px solid var(--border-l); border-radius: var(--r); background: var(--bg-l); cursor: pointer; appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath d='M2 4l4 4 4-4' stroke='%23818079' stroke-width='1.5' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 14px center; padding-right: 36px; }
+    .calc-select:focus { border-color: var(--green-d); outline: none; }
+    .calc-input-wrap input::placeholder { color: var(--muted-l); opacity: 0.4; font-weight: 400; }
+    .calc-input-wrap input[type=number]::-webkit-inner-spin-button, .calc-input-wrap input[type=number]::-webkit-outer-spin-button { -webkit-appearance: none; }
+    .calc-input-wrap input[type=number] { -moz-appearance: textfield; appearance: textfield; }
+
+    /* Result area */
+    .ferr-calc-result { padding: 24px 32px 30px; background: var(--bg-la); border-top: 1px solid var(--border-l); }
+
+    .nano-badge {
+      display: inline-flex; align-items: center; gap: 7px;
+      padding: 6px 14px; border-radius: 100px; margin-bottom: 20px;
+      font-size: 0.7rem; font-weight: 700; letter-spacing: 0.04em;
+    }
+    .nano-badge.yes { background: rgba(0,143,84,0.1); color: var(--green-d); border: 1px solid rgba(0,143,84,0.2); }
+    .nano-badge.no  { background: rgba(40,38,30,0.06); color: var(--muted-l); border: 1px solid var(--border-l); }
+    .nano-badge::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: currentColor; }
+
+    .result-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
+    .result-col {
+      background: #fff; border: 1px solid var(--border-l); border-radius: 12px;
+      padding: 16px 18px;
+    }
+    .result-col-label { font-size: 0.62rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted-l); margin-bottom: 10px; }
+    .result-col-val { font-size: 1.35rem; font-weight: 900; color: var(--green-d); letter-spacing: -0.025em; font-variant-numeric: tabular-nums; line-height: 1.1; }
+    .result-col-val.neutral { color: var(--text-l); }
+    .result-col-sub { font-size: 0.7rem; color: var(--muted-l); margin-top: 4px; }
+
+    .result-divider { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; }
+    .result-divider-line { flex: 1; height: 1px; background: var(--border-l); }
+    .result-divider-text { font-size: 0.62rem; font-weight: 700; color: var(--muted-l); text-transform: uppercase; letter-spacing: 0.1em; white-space: nowrap; }
+
+    .result-delta {
+      display: flex; align-items: baseline; justify-content: space-between;
+      padding: 14px 18px; border-radius: 10px; gap: 12px;
+    }
+    .result-delta.up   { background: rgba(220,38,38,0.06); border: 1px solid rgba(220,38,38,0.14); }
+    .result-delta.down { background: rgba(0,143,84,0.06);  border: 1px solid rgba(0,143,84,0.16); }
+    .result-delta.same { background: var(--bg-la); border: 1px solid var(--border-l); }
+    .result-delta-label { font-size: 0.72rem; font-weight: 600; color: var(--muted-l); }
+    .result-delta-val { font-size: 1rem; font-weight: 900; letter-spacing: -0.02em; font-variant-numeric: tabular-nums; }
+    .result-delta.up   .result-delta-val { color: #dc2626; }
+    .result-delta.down .result-delta-val { color: var(--green-d); }
+    .result-delta.same .result-delta-val { color: var(--text-l); }
+
+    .result-placeholder { font-size: 0.8rem; color: var(--muted-l); text-align: center; padding: 20px 0; }
+
+    .result-disclaimer {
+      margin-top: 14px; font-size: 0.65rem; color: var(--muted-l);
+      line-height: 1.65; padding-top: 12px; border-top: 1px solid var(--border-l);
+    }
+
+    /* Content */
+    .ferr-content { padding: 80px 0 96px; background: var(--bg-l); }
+    .ferr-content-inner { max-width: 680px; margin: 0 auto; }
+    .ferr-content-inner h2 { font-size: 1.25rem; font-weight: 800; color: var(--text-l); letter-spacing: -0.02em; margin: 0 0 12px; text-wrap: balance; }
+    .ferr-content-inner h2:not(:first-child) { margin-top: 52px; }
+    .ferr-content-inner p { font-size: 0.92rem; color: var(--muted-l); line-height: 1.88; margin-bottom: 14px; text-wrap: pretty; }
+    .ferr-content-inner strong { color: var(--text-l); font-weight: 700; }
+
+    .timeline {
+      display: flex; flex-direction: column; gap: 0;
+      margin: 20px 0 24px; border-left: 2px solid var(--border-l);
+      padding-left: 24px;
+    }
+    .timeline-item { position: relative; padding-bottom: 24px; }
+    .timeline-item:last-child { padding-bottom: 0; }
+    .timeline-item::before {
+      content: ''; position: absolute; left: -31px; top: 4px;
+      width: 10px; height: 10px; border-radius: 50%;
+      background: var(--green-d); border: 2px solid var(--bg-l);
+    }
+    .timeline-year { font-size: 0.7rem; font-weight: 800; color: var(--green-d); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 3px; }
+    .timeline-desc { font-size: 0.88rem; color: var(--text-l); line-height: 1.6; }
+
+    .aliquot-table { width: 100%; border-collapse: collapse; margin: 16px 0 24px; font-size: 0.86rem; }
+    .aliquot-table th { text-align: left; font-size: 0.62rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted-l); padding: 0 12px 10px 0; border-bottom: 1px solid var(--border-l); }
+    .aliquot-table td { padding: 10px 12px 10px 0; border-bottom: 1px solid var(--border-l); color: var(--text-l); line-height: 1.5; }
+    .aliquot-table tr:last-child td { border-bottom: none; }
+    .aliquot-badge { display: inline-block; font-size: 0.75rem; font-weight: 800; padding: 3px 8px; border-radius: 4px; }
+    .aliquot-badge.zero { background: rgba(0,143,84,0.1); color: var(--green-d); }
+    .aliquot-badge.red  { background: rgba(0,143,84,0.07); color: var(--green-d); }
+    .aliquot-badge.full { background: rgba(40,38,30,0.08); color: var(--text-l); }
+
+    /* CTA */
+    .ferr-cta { padding: 80px 0; background: var(--bg-alt); color: #fff; }
+    .ferr-cta-inner { display: flex; align-items: center; justify-content: space-between; gap: 48px; }
+    .ferr-cta-text h2 { font-size: clamp(1.5rem, 2.8vw, 2.2rem); font-weight: 800; line-height: 1.15; letter-spacing: -0.02em; margin-bottom: 10px; }
+    .ferr-cta-text p { font-size: 0.88rem; color: var(--muted); line-height: 1.8; max-width: 380px; }
+    .ferr-cta-actions { display: flex; gap: 12px; flex-shrink: 0; flex-wrap: wrap; }
+
+    @media (max-width: 860px) { .ferr-cta-inner { flex-direction: column; align-items: flex-start; gap: 28px; } }
+    @media (max-width: 640px) {
+      .ferr-hero { padding: 110px 0 48px; }
+      .ferr-calc-header, .ferr-calc-body, .ferr-calc-result { padding-left: 20px; padding-right: 20px; }
+      .result-cols { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<nav class="nav" id="nav">
+  <div class="container">
+    <a href="index.html" class="nav-logo"><img src="images/logo-horizontal.png" alt="Lucri" /></a>
+    <div class="nav-menu">
+      <nav class="nav-links">
+        <a href="index.html#empresa">A empresa</a>
+        <a href="index.html#servicos">Serviços</a>
+        <a href="index.html#socios">Os sócios</a>
+        <a href="index.html#numeros">Números</a>
+        <a href="ferramentas.html" class="active">Ferramentas</a>
+        <a href="index.html#contato">Contato</a>
+      </nav>
+      <div class="nav-cta"><a href="index.html#contato" class="btn btn-ghost">Fale conosco</a></div>
+      <button class="nav-hamburger" id="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+  <nav class="nav-drawer" id="drawer">
+    <a href="index.html#empresa">A empresa</a><a href="index.html#servicos">Serviços</a><a href="index.html#socios">Os sócios</a><a href="index.html#numeros">Números</a><a href="ferramentas.html">Ferramentas</a><a href="index.html#contato">Contato</a>
+    <a href="index.html#contato" class="btn btn-primary" style="margin-top:16px;">Fale conosco</a>
+  </nav>
+</nav>
+
+<section class="ferr-hero">
+  <div class="ferr-hero-bg"></div>
+  <div class="ferr-hero-overlay"></div>
+  <div class="ferr-hero-content">
+    <div class="container">
+      <a href="ferramentas.html" class="ferr-breadcrumb">← Todas as ferramentas</a>
+      <div class="ferr-tag">Tributário · Transição 2026–2033</div>
+      <h1 class="ferr-title">Simulador da<br />Reforma Tributária</h1>
+      <p class="ferr-sub">Estime o impacto do novo sistema CBS + IBS no seu negócio e compare com a carga tributária atual. Baseado nos dados oficiais da PEC 45/2019.</p>
+    </div>
+  </div>
+</section>
+
+<section class="ferr-calc-section">
+  <div class="container">
+    <div class="ferr-calc-card">
+      <div class="ferr-calc-header">
+        <h2>Impacto da Reforma no seu negócio</h2>
+        <p>Preencha os campos abaixo para ver a estimativa comparativa entre o sistema atual e o novo sistema.</p>
+      </div>
+      <div class="ferr-calc-body">
+
+        <div class="calc-field">
+          <label>Faturamento Mensal</label>
+          <div class="calc-input-wrap">
+            <span class="calc-prefix">R$</span>
+            <input type="number" id="fat" placeholder="50.000" min="0" />
+          </div>
+        </div>
+
+        <div class="calc-field">
+          <label>Segmento do negócio</label>
+          <select id="segmento" class="calc-select">
+            <option value="">Selecione...</option>
+            <optgroup label="Alíquota zero (0%)">
+              <option value="cesta">Cesta básica (frutas, verduras, ovos, leite, feijão...)</option>
+            </optgroup>
+            <optgroup label="Alíquota reduzida (~10,6%)">
+              <option value="reduzida">Saúde — consultas, clínicas, hospitais</option>
+              <option value="reduzida">Farmácia — medicamentos e dispositivos médicos</option>
+              <option value="reduzida">Educação — escolas, cursos, faculdades</option>
+              <option value="reduzida">Alimentos em geral (não-cesta básica)</option>
+              <option value="reduzida">Agronegócio — insumos e produtos in natura</option>
+              <option value="reduzida">Cultura, esporte ou transporte coletivo</option>
+            </optgroup>
+            <optgroup label="Alíquota padrão (até 26,5%)">
+              <option value="padrao">Serviços em geral</option>
+              <option value="padrao">Comércio (varejo e atacado)</option>
+              <option value="padrao">Indústria</option>
+              <option value="padrao">Serviços financeiros e seguros</option>
+              <option value="padrao">Tecnologia e software</option>
+              <option value="padrao">Construção civil e imóveis</option>
+            </optgroup>
+          </select>
+          <span class="hint">Determina qual alíquota do CBS + IBS se aplica ao seu setor.</span>
+        </div>
+
+        <div class="calc-field">
+          <label>% do faturamento gasto em compras e insumos</label>
+          <div class="calc-input-wrap">
+            <input type="number" id="compras" placeholder="30" min="0" max="90" step="5" />
+            <span class="calc-suffix">%</span>
+          </div>
+          <span class="hint">Esse valor gera créditos no novo sistema (não-cumulativo). Serviços puros: ~10–25%. Comércio/revenda: ~50–70%. Indústria: ~40–60%.</span>
+        </div>
+
+        <div class="calc-field">
+          <label>Regime tributário atual</label>
+          <select id="regime" class="calc-select">
+            <option value="">Selecione...</option>
+            <option value="simples">Simples Nacional</option>
+            <option value="presumido">Lucro Presumido</option>
+            <option value="real">Lucro Real</option>
+          </select>
+          <span class="hint">Usado para estimar a carga atual de comparação.</span>
+        </div>
+
+      </div>
+
+      <div class="ferr-calc-result" id="result-area">
+        <p class="result-placeholder">Preencha os campos acima para ver a estimativa.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="ferr-content">
+  <div class="container">
+    <div class="ferr-content-inner">
+
+      <h2>O que muda com a Reforma Tributária?</h2>
+      <p>A reforma substitui <strong>cinco impostos</strong> (PIS, Cofins, ICMS, ISS e IPI) por dois: o <strong>CBS</strong> (Contribuição sobre Bens e Serviços, federal) e o <strong>IBS</strong> (Imposto sobre Bens e Serviços, de estados e municípios). Juntos, formam o <strong>IVA Dual</strong> — modelo adotado em 174 dos 193 países reconhecidos pela ONU.</p>
+      <p>A mudança principal é o fim da cumulatividade: em cada etapa da cadeia, a empresa deduz o imposto já pago na etapa anterior. Quem paga o imposto de verdade é o consumidor final — as empresas intermediárias ficam desoneradas.</p>
+
+      <h2>Cronograma de implementação</h2>
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="timeline-year">2026 — agora</div>
+          <div class="timeline-desc">CBS (0,9%) e IBS (0,1%) são cobrados em paralelo com os impostos antigos. O valor recolhido pode ser usado para compensar o PIS/Cofins. Ano de calibragem do sistema.</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-year">2027</div>
+          <div class="timeline-desc">CBS entra em alíquota cheia. PIS e Cofins são extintos. IPI zerado (exceto Zona Franca de Manaus). Imposto Seletivo criado (incide sobre cigarros, bebidas alcoólicas, apostas etc.).</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-year">2029</div>
+          <div class="timeline-desc">IBS substitui 10% do ICMS e ISS. Os 90% restantes continuam em vigor.</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-year">2030</div>
+          <div class="timeline-desc">IBS substitui 20% do ICMS e ISS.</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-year">2031</div>
+          <div class="timeline-desc">IBS substitui 30% do ICMS e ISS.</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-year">2032</div>
+          <div class="timeline-desc">IBS substitui 40% do ICMS e ISS.</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-year">2033</div>
+          <div class="timeline-desc">Sistema totalmente novo em vigor. ICMS, ISS e IPI são extintos definitivamente.</div>
+        </div>
+      </div>
+
+      <h2>Quais alíquotas se aplicam ao meu negócio?</h2>
+      <table class="aliquot-table">
+        <thead>
+          <tr>
+            <th>Categoria</th>
+            <th>Alíquota CBS + IBS</th>
+            <th>O que inclui</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Cesta básica nacional</td>
+            <td><span class="aliquot-badge zero">0%</span></td>
+            <td>Frutas, hortaliças, ovos e demais itens a serem definidos em lei complementar</td>
+          </tr>
+          <tr>
+            <td>Alíquota reduzida</td>
+            <td><span class="aliquot-badge red">~10,6%</span></td>
+            <td>Saúde, medicamentos, dispositivos médicos, educação, alimentos em geral, insumos agrícolas, produtos agropecuários in natura, cultura, esporte e transporte coletivo de passageiros</td>
+          </tr>
+          <tr>
+            <td>Alíquota padrão</td>
+            <td><span class="aliquot-badge full">25,45% a 27%</span></td>
+            <td>Serviços em geral, comércio, indústria, tecnologia, construção civil e serviços financeiros</td>
+          </tr>
+          <tr>
+            <td>Imposto Seletivo</td>
+            <td><span class="aliquot-badge full">padrão + adicional</span></td>
+            <td>Cigarro, bebidas alcoólicas, veículos, apostas e produtos prejudiciais à saúde ou ao meio ambiente</td>
+          </tr>
+        </tbody>
+      </table>
+      <p>A alíquota reduzida equivale a <strong>40% da alíquota padrão</strong> (ou seja, 60% de desconto). As alíquotas definitivas serão fixadas pelo Senado Federal durante o período de transição e revisadas anualmente.</p>
+
+      <h2>E quem está no Simples Nacional?</h2>
+      <p>O Simples Nacional <strong>é mantido</strong> pela reforma. As micro e pequenas empresas terão duas opções:</p>
+      <p><strong>Opção A:</strong> apurar e recolher o CBS e o IBS pelas regras do próprio Simples — com a possibilidade de transferir créditos para os adquirentes. Mais simples, mas o crédito transferido é proporcional ao que foi recolhido no Simples.</p>
+      <p><strong>Opção B:</strong> apurar e recolher o CBS e o IBS pelo regime normal de apuração (com aproveitamento integral de créditos), mantendo o Simples apenas para os demais tributos. Pode ser vantajoso para quem vende muito para empresas do Lucro Real ou Presumido, que valorizam o crédito integral.</p>
+      <p>A escolha entre as opções impacta a competitividade e o fluxo de caixa. <strong>Simular as duas alternativas antes de decidir é fundamental.</strong></p>
+
+      <h2>O que é o cashback tributário?</h2>
+      <p>A reforma prevê a devolução de parte do imposto pago para <strong>famílias de menor renda</strong> — o chamado cashback. O mecanismo torna o sistema progressivo: quem ganha menos paga proporcionalmente menos imposto.</p>
+      <p>Os beneficiários, os limites e a forma de devolução ainda serão definidos em lei complementar. A medida complementa a isenção da cesta básica e já é usada por países como Equador, Uruguai e Colômbia.</p>
+
+      <h2>O sistema não-cumulativo me beneficia?</h2>
+      <p>Depende do quanto você compra de outros contribuintes. Empresas com muitos fornecedores (indústria, comércio atacadista, distribuidoras) acumulam mais créditos e tendem a ter carga líquida menor do que a alíquota bruta sugere. Empresas de serviços com poucos insumos aproveitam menos créditos e sentem mais o peso da alíquota padrão.</p>
+      <p>Para o Simples Nacional, o impacto real depende da opção escolhida e de quem são os seus clientes. Empresas que compram de você e precisam de crédito integral podem preferir fornecedores na opção B.</p>
+
+    </div>
+  </div>
+</section>
+
+<section class="ferr-cta">
+  <div class="container">
+    <div class="ferr-cta-inner">
+      <div class="ferr-cta-text">
+        <h2>A simulação gerou dúvidas<br />ou preocupação?</h2>
+        <p>A reforma já está em vigor. Entender o impacto real no seu negócio — incluindo a escolha entre as opções do Simples — exige análise dos seus dados concretos. A Lucri está aqui para ajudar.</p>
+      </div>
+      <div class="ferr-cta-actions">
+        <a href="index.html#contato" class="btn btn-primary">Falar com a Lucri</a>
+        <a href="ferramentas.html" class="btn btn-ghost">Ver todas as ferramentas</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="footer-top">
+      <div class="footer-brand"><img src="images/logo-tagline.png" alt="Lucri Finanças Corporativas" /><p>Empresa de finanças corporativas especializada em BPO Financeiro, Controladoria e Consultoria Estratégica para PMEs.</p></div>
+      <div class="footer-col"><h4>A empresa</h4><ul><li><a href="index.html#empresa">Quem somos</a></li><li><a href="index.html#socios">Os sócios</a></li><li><a href="index.html#numeros">Histórico</a></li></ul></div>
+      <div class="footer-col"><h4>Ferramentas</h4><ul>
+        <li><a href="ferramenta-ponto-equilibrio.html">Ponto de Equilíbrio</a></li>
+        <li><a href="ferramenta-margem-lucro.html">Margem de Lucro</a></li>
+        <li><a href="ferramenta-markup.html">Markup e Precificação</a></li>
+        <li><a href="ferramenta-capital-giro.html">Capital de Giro</a></li>
+        <li><a href="ferramenta-cac.html">CAC</a></li>
+        <li><a href="ferramenta-custo-funcionario.html">Custo do Funcionário</a></li>
+        <li><a href="ferramenta-reforma-tributaria.html">Reforma Tributária</a></li>
+      </ul></div>
+      <div class="footer-col"><h4>Contato</h4><address>Av. Paraná, 1750 - Sala 17<br />Boa Vista · Curitiba, PR<br /><br /><a href="https://wa.me/5541992423755" target="_blank" rel="noopener">(41) 9 9242-3755</a><br />lucrifinancas@gmail.com</address></div>
+    </div>
+    <div class="footer-bottom"><p>© 2026 Lucri Finanças Corporativas. Todos os direitos reservados.</p><a href="#">Política de Privacidade</a></div>
+  </div>
+</footer>
+
+<script src="js/main.js"></script>
+<script>
+const fmt  = (n) => n.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+const fmtP = (n, dec = 1) => n.toFixed(dec).replace('.', ',') + '%';
+const val  = (id) => parseFloat(document.getElementById(id)?.value) || 0;
+const sel  = (id) => document.getElementById(id)?.value || '';
+
+const ALIQUOTS = { cesta: 0, reduzida: 10.6, padrao: 26.5 };
+const ALIQUOT_LABELS = { cesta: '0% — Isento (cesta básica)', reduzida: '10,6% — Reduzida', padrao: '26,5% — Padrão máximo' };
+const CURRENT_RATES = { simples: 8.5, presumido: 15.5, real: 13.0 };
+const REGIME_LABELS = { simples: 'Simples Nacional', presumido: 'Lucro Presumido', real: 'Lucro Real' };
+
+function calc() {
+  const fat     = val('fat');
+  const segmento = sel('segmento');
+  const compras  = Math.min(val('compras'), 90);
+  const regime   = sel('regime');
+  const area     = document.getElementById('result-area');
+
+  if (!fat || !segmento || !regime) {
+    area.innerHTML = '<p class="result-placeholder">Preencha todos os campos para ver a estimativa.</p>';
+    return;
+  }
+
+  /* ── Nanoempreendedor ── */
+  const isNano = fat * 12 <= 40500;
+
+  /* ── Novo sistema (CBS + IBS) ── */
+  const aliquot   = ALIQUOTS[segmento] / 100;
+  const credits   = fat * (compras / 100) * aliquot;
+  const grossTax  = fat * aliquot;
+  const netTax    = isNano ? 0 : Math.max(0, grossTax - credits);
+  const effRate   = fat > 0 ? netTax / fat * 100 : 0;
+
+  /* ── Sistema atual (estimativa) ── */
+  const curRate   = CURRENT_RATES[regime] / 100;
+  const curTax    = fat * curRate;
+
+  /* ── Delta ── */
+  const delta     = netTax - curTax;
+  const deltaClass = Math.abs(delta) < fat * 0.005 ? 'same' : delta > 0 ? 'up' : 'down';
+  const deltaSign  = delta > 0 ? '+' : '';
+  const deltaIcon  = deltaClass === 'up' ? '↑' : deltaClass === 'down' ? '↓' : '≈';
+
+  area.innerHTML = `
+    <div class="nano-badge ${isNano ? 'yes' : 'no'}">
+      ${isNano ? 'Nanoempreendedor — isento de CBS + IBS' : 'Não se enquadra como Nanoempreendedor'}
+    </div>
+
+    <div class="result-cols">
+      <div class="result-col">
+        <div class="result-col-label">Novo sistema — CBS + IBS</div>
+        <div class="result-col-val">${fmt(netTax)}</div>
+        <div class="result-col-sub">${ALIQUOT_LABELS[segmento]}<br />Taxa efetiva: ${fmtP(effRate)}</div>
+      </div>
+      <div class="result-col">
+        <div class="result-col-label">Sistema atual — estimado</div>
+        <div class="result-col-val neutral">${fmt(curTax)}</div>
+        <div class="result-col-sub">${REGIME_LABELS[regime]}<br />Estimativa: ~${fmtP(CURRENT_RATES[regime])}</div>
+      </div>
+    </div>
+
+    <div class="result-divider">
+      <div class="result-divider-line"></div>
+      <div class="result-divider-text">Impacto estimado por mês</div>
+      <div class="result-divider-line"></div>
+    </div>
+
+    <div class="result-delta ${deltaClass}">
+      <span class="result-delta-label">${deltaClass === 'up' ? 'Carga tende a subir' : deltaClass === 'down' ? 'Carga tende a cair' : 'Carga semelhante'}</span>
+      <span class="result-delta-val">${deltaIcon} ${deltaSign}${fmt(Math.abs(delta))} / mês</span>
+    </div>
+
+    <p class="result-disclaimer">
+      Simulação com base nos dados oficiais da PEC 45/2019 e na Nota Técnica do Ministério da Fazenda.
+      Alíquota padrão estimada em 25,45%–27%; usamos 26,5% como referência central.
+      A carga atual é estimativa média por regime — o valor real varia por setor e faturamento.
+      Empresas do Simples Nacional têm regras específicas de transição.
+      <strong>Consulte um especialista antes de tomar decisões.</strong>
+    </p>
+  `;
+}
+
+['fat', 'compras'].forEach(id => document.getElementById(id)?.addEventListener('input', calc));
+['segmento', 'regime'].forEach(id => document.getElementById(id)?.addEventListener('change', calc));
+</script>
+</body>
+</html>

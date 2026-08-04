@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Calculadora de Capital de Giro | Lucri Finanças Corporativas</title>
+  <meta name="description" content="Calcule a necessidade de capital de giro da sua empresa com base nos prazos de recebimento e pagamento." />
+  <link rel="icon" type="image/png" href="images/logo-simbolo.png" />
+  <link rel="canonical" href="https://lucrifinancas.com.br/ferramenta-capital-giro.html" />
+  <meta property="og:type" content="website" />
+  <meta property="og:locale" content="pt_BR" />
+  <meta property="og:url" content="https://lucrifinancas.com.br/ferramenta-capital-giro.html" />
+  <meta property="og:site_name" content="Lucri Finanças Corporativas" />
+  <meta property="og:title" content="Calculadora de Capital de Giro | Lucri Finanças Corporativas" />
+  <meta property="og:description" content="Calcule a necessidade de capital de giro da sua empresa com base nos prazos de recebimento e pagamento." />
+  <meta property="og:image" content="https://lucrifinancas.com.br/images/founders.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="1500" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Calculadora de Capital de Giro | Lucri Finanças Corporativas" />
+  <meta name="twitter:description" content="Calcule a necessidade de capital de giro da sua empresa com base nos prazos de recebimento e pagamento." />
+  <meta name="twitter:image" content="https://lucrifinancas.com.br/images/founders.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;600;700&family=Montserrat:wght@700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+  <style>
+    .ferr-hero { padding: 120px 0 64px; position: relative; display: flex; align-items: center; background: var(--bg); overflow: hidden; }
+    .ferr-hero-bg { position: absolute; inset: 0; background: radial-gradient(ellipse 80% 60% at 100% 100%, rgba(0,235,133,0.14) 0%, transparent 50%), var(--bg); }
+    .ferr-hero-overlay { position: absolute; inset: 0; background: linear-gradient(to right, rgba(1,1,22,0.7) 0%, rgba(1,1,22,0.3) 55%, transparent 100%); }
+    .ferr-hero-content { position: relative; z-index: 2; }
+    .ferr-breadcrumb { display: inline-flex; align-items: center; gap: 8px; font-size: 0.78rem; font-weight: 600; color: rgba(255,255,255,0.45); text-decoration: none; margin-bottom: 20px; transition: color 0.15s; }
+    .ferr-breadcrumb:hover { color: rgba(255,255,255,0.8); }
+    .ferr-tag { display: inline-block; font-size: 0.6rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.14em; color: var(--green); border: 1px solid rgba(0,235,133,0.3); padding: 4px 10px; border-radius: 4px; margin-bottom: 14px; }
+    .ferr-title { font-family: var(--font-brand); font-size: clamp(1.9rem, 4.2vw, 3.2rem); font-weight: 900; line-height: 1.08; letter-spacing: -0.02em; color: #fff; margin-bottom: 14px; text-wrap: balance; }
+    .ferr-sub { font-size: 0.95rem; color: var(--muted); line-height: 1.8; max-width: 480px; }
+    .ferr-calc-section { padding: 72px 0 96px; background: var(--bg-la); }
+    .ferr-calc-card { max-width: 580px; margin: 0 auto; background: #fff; border: 1px solid var(--border-l); border-radius: 20px; overflow: hidden; box-shadow: 0 4px 32px rgba(40,38,30,0.07); }
+    .ferr-calc-header { padding: 28px 32px 22px; border-bottom: 1px solid var(--border-l); }
+    .ferr-calc-header h2 { font-size: 1.05rem; font-weight: 800; color: var(--text-l); letter-spacing: -0.01em; margin-bottom: 4px; }
+    .ferr-calc-header p { font-size: 0.8rem; color: var(--muted-l); line-height: 1.65; }
+    .ferr-calc-body { padding: 26px 32px; display: flex; flex-direction: column; gap: 16px; }
+    .calc-field { display: flex; flex-direction: column; gap: 6px; }
+    .calc-field label { font-size: 0.64rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted-l); }
+    .calc-input-wrap { display: flex; align-items: stretch; border: 1px solid var(--border-l); border-radius: var(--r); overflow: hidden; background: var(--bg-l); transition: border-color 0.18s; }
+    .calc-input-wrap:focus-within { border-color: var(--green-d); }
+    .calc-prefix, .calc-suffix { padding: 0 12px; font-size: 0.75rem; font-weight: 700; color: var(--muted-l); background: var(--bg-la); display: flex; align-items: center; user-select: none; }
+    .calc-prefix { border-right: 1px solid var(--border-l); }
+    .calc-suffix { border-left: 1px solid var(--border-l); }
+    .calc-input-wrap input { flex: 1; min-width: 0; border: none; outline: none; background: transparent; padding: 12px 14px; font-family: var(--font); font-size: 0.92rem; font-weight: 600; color: var(--text-l); }
+    .calc-input-wrap input::placeholder { color: var(--muted-l); opacity: 0.4; font-weight: 400; }
+    .calc-input-wrap input[type=number]::-webkit-inner-spin-button, .calc-input-wrap input[type=number]::-webkit-outer-spin-button { -webkit-appearance: none; }
+    .calc-input-wrap input[type=number] { -moz-appearance: textfield; appearance: textfield; }
+    .ferr-calc-result { padding: 22px 32px 28px; background: rgba(0,143,84,0.04); border-top: 1px solid rgba(0,143,84,0.10); }
+    .result-row { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; margin-bottom: 10px; }
+    .result-label { font-size: 0.72rem; font-weight: 600; color: var(--muted-l); }
+    .result-val { font-size: 1.6rem; font-weight: 900; color: var(--green-d); letter-spacing: -0.03em; font-variant-numeric: tabular-nums; }
+    .result-note { font-size: 0.68rem; color: var(--muted-l); line-height: 1.65; }
+    .ferr-content { padding: 80px 0 96px; background: var(--bg-l); }
+    .ferr-content-inner { max-width: 680px; margin: 0 auto; }
+    .ferr-content-inner h2 { font-size: 1.25rem; font-weight: 800; color: var(--text-l); letter-spacing: -0.02em; margin: 0 0 12px; text-wrap: balance; }
+    .ferr-content-inner h2:not(:first-child) { margin-top: 52px; }
+    .ferr-content-inner p { font-size: 0.92rem; color: var(--muted-l); line-height: 1.88; margin-bottom: 14px; text-wrap: pretty; }
+    .ferr-content-inner strong { color: var(--text-l); font-weight: 700; }
+    .ferr-formula { background: var(--bg-la); border: 1px solid var(--border-l); border-radius: 10px; padding: 16px 20px; margin: 16px 0 20px; font-size: 0.9rem; font-weight: 700; color: var(--text-l); font-family: monospace; line-height: 1.6; }
+    .ferr-cta { padding: 80px 0; background: var(--bg-alt); color: #fff; }
+    .ferr-cta-inner { display: flex; align-items: center; justify-content: space-between; gap: 48px; }
+    .ferr-cta-text h2 { font-size: clamp(1.5rem, 2.8vw, 2.2rem); font-weight: 800; line-height: 1.15; letter-spacing: -0.02em; margin-bottom: 10px; }
+    .ferr-cta-text p { font-size: 0.88rem; color: var(--muted); line-height: 1.8; max-width: 380px; }
+    .ferr-cta-actions { display: flex; gap: 12px; flex-shrink: 0; flex-wrap: wrap; }
+    @media (max-width: 860px) { .ferr-cta-inner { flex-direction: column; align-items: flex-start; gap: 28px; } }
+    @media (max-width: 640px) { .ferr-hero { padding: 110px 0 48px; } .ferr-calc-header, .ferr-calc-body, .ferr-calc-result { padding-left: 20px; padding-right: 20px; } }
+  </style>
+</head>
+<body>
+
+<nav class="nav" id="nav">
+  <div class="container">
+    <a href="index.html" class="nav-logo"><img src="images/logo-horizontal.png" alt="Lucri" /></a>
+    <div class="nav-menu">
+      <nav class="nav-links">
+        <a href="index.html#empresa">A empresa</a><a href="index.html#servicos">Serviços</a><a href="index.html#socios">Os sócios</a><a href="index.html#numeros">Números</a>
+        <a href="ferramentas.html" class="active">Ferramentas</a><a href="index.html#contato">Contato</a>
+      </nav>
+      <div class="nav-cta"><a href="index.html#contato" class="btn btn-ghost">Fale conosco</a></div>
+      <button class="nav-hamburger" id="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+  <nav class="nav-drawer" id="drawer">
+    <a href="index.html#empresa">A empresa</a><a href="index.html#servicos">Serviços</a><a href="index.html#socios">Os sócios</a><a href="index.html#numeros">Números</a><a href="ferramentas.html">Ferramentas</a><a href="index.html#contato">Contato</a>
+    <a href="index.html#contato" class="btn btn-primary" style="margin-top:16px;">Fale conosco</a>
+  </nav>
+</nav>
+
+<section class="ferr-hero">
+  <div class="ferr-hero-bg"></div><div class="ferr-hero-overlay"></div>
+  <div class="ferr-hero-content">
+    <div class="container">
+      <a href="ferramentas.html" class="ferr-breadcrumb">← Todas as ferramentas</a>
+      <div class="ferr-tag">Fluxo de Caixa</div>
+      <h1 class="ferr-title">Calculadora de<br />Capital de Giro</h1>
+      <p class="ferr-sub">Descubra quanto dinheiro a empresa precisa ter disponível para operar sem apertar o caixa.</p>
+    </div>
+  </div>
+</section>
+
+<section class="ferr-calc-section">
+  <div class="container">
+    <div class="ferr-calc-card">
+      <div class="ferr-calc-header">
+        <h2>Necessidade de Capital de Giro</h2>
+        <p>Informe o faturamento mensal e os prazos médios de recebimento e pagamento.</p>
+      </div>
+      <div class="ferr-calc-body">
+        <div class="calc-field">
+          <label>Faturamento Mensal</label>
+          <div class="calc-input-wrap"><span class="calc-prefix">R$</span><input type="number" id="cg-fat" placeholder="80.000" min="0" /></div>
+        </div>
+        <div class="calc-field">
+          <label>Prazo médio de recebimento</label>
+          <div class="calc-input-wrap"><input type="number" id="cg-receb" placeholder="30" min="0" max="365" /><span class="calc-suffix">dias</span></div>
+        </div>
+        <div class="calc-field">
+          <label>Prazo médio de pagamento</label>
+          <div class="calc-input-wrap"><input type="number" id="cg-pgto" placeholder="15" min="0" max="365" /><span class="calc-suffix">dias</span></div>
+        </div>
+      </div>
+      <div class="ferr-calc-result">
+        <div class="result-row">
+          <span class="result-label">Capital de Giro necessário</span>
+          <span class="result-val" id="cg-result">R$ —</span>
+        </div>
+        <p class="result-note">Quanto maior o prazo de recebimento e menor o de pagamento, mais capital você precisa em caixa.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="ferr-content">
+  <div class="container">
+    <div class="ferr-content-inner">
+
+      <h2>O que é capital de giro?</h2>
+      <p>Capital de giro é o dinheiro necessário para manter as operações do dia a dia da empresa — pagar fornecedores, funcionários e despesas — enquanto o dinheiro das vendas ainda não entrou no caixa.</p>
+      <p>Toda empresa que vende a prazo ou tem prazos de pagamento mais curtos do que os de recebimento precisa de capital de giro para não paralisar as operações.</p>
+
+      <h2>Como calcular a necessidade de capital de giro</h2>
+      <p>A fórmula considera a diferença entre os prazos: se você recebe em 30 dias mas paga em 15, há uma janela de 15 dias em que o dinheiro ainda não entrou mas já precisa sair.</p>
+      <div class="ferr-formula">
+        Ciclo Financeiro = Prazo de Recebimento − Prazo de Pagamento<br />
+        NCG = (Faturamento ÷ 30) × Ciclo Financeiro
+      </div>
+      <p><strong>Exemplo:</strong> faturamento de R$ 80.000/mês, recebimento em 30 dias e pagamento em 15 dias. Ciclo financeiro = 15 dias. NCG = (R$ 80.000 ÷ 30) × 15 = <strong>R$ 40.000</strong>.</p>
+
+      <h2>O que acontece quando o capital de giro falta?</h2>
+      <p>A empresa começa a atrasar pagamentos, perder desconto de fornecedores e recorrer a empréstimos caros de curto prazo. Em casos extremos, uma empresa lucrativa pode quebrar por falta de caixa — o chamado <strong>lucro sem dinheiro</strong>. Monitorar a NCG é fundamental para qualquer PME.</p>
+
+    </div>
+  </div>
+</section>
+
+<section class="ferr-cta">
+  <div class="container">
+    <div class="ferr-cta-inner">
+      <div class="ferr-cta-text">
+        <h2>O capital de giro ficou<br />alto demais?</h2>
+        <p>Se o resultado preocupou ou você não sabe como financiar esse gap sem recorrer a empréstimos caros — a Lucri está aqui para ajudar. A gente encontra o caminho junto com você.</p>
+      </div>
+      <div class="ferr-cta-actions">
+        <a href="index.html#contato" class="btn btn-primary">Falar com a Lucri</a>
+        <a href="ferramentas.html" class="btn btn-ghost">Ver todas as ferramentas</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="footer-top">
+      <div class="footer-brand"><img src="images/logo-tagline.png" alt="Lucri Finanças Corporativas" /><p>Empresa de finanças corporativas especializada em BPO Financeiro, Controladoria e Consultoria Estratégica para PMEs.</p></div>
+      <div class="footer-col"><h4>A empresa</h4><ul><li><a href="index.html#empresa">Quem somos</a></li><li><a href="index.html#socios">Os sócios</a></li><li><a href="index.html#numeros">Histórico</a></li></ul></div>
+      <div class="footer-col"><h4>Ferramentas</h4><ul><li><a href="ferramenta-ponto-equilibrio.html">Ponto de Equilíbrio</a></li><li><a href="ferramenta-margem-lucro.html">Margem de Lucro</a></li><li><a href="ferramenta-markup.html">Markup e Precificação</a></li><li><a href="ferramenta-capital-giro.html">Capital de Giro</a></li><li><a href="ferramenta-cac.html">CAC</a></li><li><a href="ferramenta-custo-funcionario.html">Custo do Funcionário</a></li><li><a href="ferramenta-reforma-tributaria.html">Reforma Tributária</a></li></ul></div>
+      <div class="footer-col"><h4>Contato</h4><address>Av. Paraná, 1750 - Sala 17<br />Boa Vista · Curitiba, PR<br /><br /><a href="https://wa.me/5541992423755" target="_blank" rel="noopener">(41) 9 9242-3755</a><br />lucrifinancas@gmail.com</address></div>
+    </div>
+    <div class="footer-bottom"><p>© 2026 Lucri Finanças Corporativas. Todos os direitos reservados.</p><a href="#">Política de Privacidade</a></div>
+  </div>
+</footer>
+
+<script src="js/main.js"></script>
+<script>
+const fmt = (n) => n.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+const val = (id) => parseFloat(document.getElementById(id)?.value) || 0;
+function calcCG() {
+  const fat = val('cg-fat'), receb = val('cg-receb'), pgto = val('cg-pgto');
+  document.getElementById('cg-result').textContent = fat > 0
+    ? fmt((fat / 30) * Math.max(0, receb - pgto))
+    : 'R$ —';
+}
+['cg-fat', 'cg-receb', 'cg-pgto'].forEach(id => document.getElementById(id)?.addEventListener('input', calcCG));
+</script>
+</body>
+</html>

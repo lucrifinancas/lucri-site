@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Serviços — Lucri Finanças Corporativas</title>
+  <meta name="description" content="BPO Financeiro, Controladoria e Indicadores e Consultoria Estratégica. A Lucri oferece gestão financeira completa para pequenas e médias empresas." />
+  <link rel="icon" type="image/png" href="images/logo-simbolo.png" />
+  <link rel="canonical" href="https://lucrifinancas.com.br/servicos.html" />
+  <meta property="og:type" content="website" />
+  <meta property="og:locale" content="pt_BR" />
+  <meta property="og:url" content="https://lucrifinancas.com.br/servicos.html" />
+  <meta property="og:site_name" content="Lucri Finanças Corporativas" />
+  <meta property="og:title" content="Serviços — Lucri Finanças Corporativas" />
+  <meta property="og:description" content="BPO Financeiro, Controladoria e Indicadores e Consultoria Estratégica. A Lucri oferece gestão financeira completa para pequenas e médias empresas." />
+  <meta property="og:image" content="https://lucrifinancas.com.br/images/founders.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="1500" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Serviços — Lucri Finanças Corporativas" />
+  <meta name="twitter:description" content="BPO Financeiro, Controladoria e Indicadores e Consultoria Estratégica. A Lucri oferece gestão financeira completa para pequenas e médias empresas." />
+  <meta name="twitter:image" content="https://lucrifinancas.com.br/images/founders.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;600;700&family=Montserrat:wght@700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css?v=2" />
+  <style>
+    .pg-hero { min-height: 40vh; padding: 140px 0 64px; position: relative; display: flex; align-items: center; background: var(--bg); overflow: hidden; }
+    .pg-hero-bg { position: absolute; inset: 0; background: radial-gradient(ellipse 75% 65% at 90% 115%, rgba(0,235,133,0.20) 0%, transparent 52%), var(--bg); }
+    .pg-hero-content { position: relative; z-index: 2; }
+    .pg-eyebrow { font-size: 0.68rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.2em; color: var(--green); display: block; margin-bottom: 18px; }
+    .pg-hero-title { font-family: var(--font-brand); font-size: clamp(2.1rem, 4.6vw, 3.4rem); font-weight: 900; line-height: 1.1; letter-spacing: -0.02em; color: #fff; margin-bottom: 18px; text-wrap: balance; }
+    .pg-hero-title .hl { color: var(--green); }
+    .pg-hero-sub { font-size: 0.97rem; color: var(--muted); line-height: 1.8; max-width: 520px; text-wrap: pretty; }
+
+    .pg-jump { padding: 44px 0; background: var(--bg); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+    .pg-jump-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    .pg-jump-card { display: flex; align-items: center; gap: 14px; padding: 20px 22px; background: rgba(255,255,255,0.03); border: 1px solid var(--border); border-radius: var(--r); transition: var(--t); }
+    .pg-jump-card:hover { border-color: rgba(0,235,133,0.28); }
+    .pg-jump-num { font-size: 0.65rem; font-weight: 700; color: var(--green); letter-spacing: 0.1em; margin-bottom: 4px; }
+    .pg-jump-name { font-size: 0.88rem; font-weight: 700; color: #fff; }
+
+    .pg-process { padding: 96px 0; background: var(--bg-la); }
+    .pg-steps { display: flex; flex-direction: column; border-top: 1px solid var(--border-l); margin-top: 48px; }
+    .pg-step { display: grid; grid-template-columns: 96px 1fr; gap: 48px; padding: 36px 0; border-bottom: 1px solid var(--border-l); align-items: start; }
+    .pg-step-n { font-size: clamp(2rem, 3vw, 2.6rem); font-weight: 900; color: var(--green-d); opacity: 0.2; line-height: 1; }
+    .pg-step h3 { font-size: 1rem; font-weight: 800; color: var(--text-l); margin-bottom: 8px; }
+    .pg-step p { font-size: 0.88rem; color: var(--muted-l); line-height: 1.8; max-width: 560px; }
+
+    .pg-cta { padding: 80px 0; background: var(--bg-alt); color: #fff; }
+    .pg-cta-inner { display: flex; align-items: center; justify-content: space-between; gap: 48px; }
+    .pg-cta-text h2 { font-size: clamp(1.6rem, 3vw, 2.4rem); font-weight: 800; line-height: 1.15; letter-spacing: -0.02em; margin-bottom: 10px; }
+    .pg-cta-text p { font-size: 0.9rem; color: var(--muted); line-height: 1.8; max-width: 420px; }
+    .pg-cta-actions { display: flex; gap: 12px; flex-shrink: 0; flex-wrap: wrap; }
+
+    @media (max-width: 960px) { .pg-jump-grid { grid-template-columns: 1fr; } }
+    @media (max-width: 700px) {
+      .pg-hero { padding: 120px 0 48px; }
+      .pg-process { padding: 64px 0; }
+      .pg-step { grid-template-columns: 56px 1fr; gap: 20px; padding: 24px 0; }
+      .pg-cta-inner { flex-direction: column; align-items: flex-start; gap: 24px; }
+    }
+  </style>
+</head>
+<body>
+
+<nav class="nav" id="nav">
+  <div class="container">
+    <a href="index.html" class="nav-logo"><img src="images/logo-horizontal.png" alt="Lucri" /></a>
+    <div class="nav-menu">
+      <nav class="nav-links">
+        <a href="sobre.html">A empresa</a>
+        <a href="servicos.html" class="active">Serviços</a>
+        <a href="sobre.html#socios">Os sócios</a>
+        <a href="sobre.html#numeros">Números</a>
+        <a href="ferramentas.html">Ferramentas</a>
+        <a href="contato.html">Contato</a>
+      </nav>
+      <div class="nav-cta">
+        <a href="contato.html" class="btn btn-ghost">Fale conosco</a>
+      </div>
+      <button class="nav-hamburger" id="hamburger" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+  <nav class="nav-drawer" id="drawer">
+    <a href="sobre.html">A empresa</a>
+    <a href="servicos.html">Serviços</a>
+    <a href="sobre.html#socios">Os sócios</a>
+    <a href="sobre.html#numeros">Números</a>
+    <a href="ferramentas.html">Ferramentas</a>
+    <a href="contato.html">Contato</a>
+    <a href="contato.html" class="btn btn-primary" style="margin-top:16px;">Fale conosco</a>
+  </nav>
+</nav>
+
+<section class="pg-hero">
+  <div class="pg-hero-bg"></div>
+  <div class="pg-hero-content">
+    <div class="container">
+      <span class="pg-eyebrow">Nossos serviços</span>
+      <h1 class="pg-hero-title">Gestão financeira do<br /><span class="hl">operacional ao estratégico</span>.</h1>
+      <p class="pg-hero-sub">Não é só organizar papel. A Lucri assume o financeiro do seu negócio e transforma número em decisão que gera lucro — nas três camadas ao mesmo tempo.</p>
+    </div>
+  </div>
+</section>
+
+<section class="pg-jump">
+  <div class="container">
+    <div class="pg-jump-grid">
+      <a href="#bpo" class="pg-jump-card">
+        <div class="pg-jump-num">01</div>
+        <div class="pg-jump-name">BPO Financeiro</div>
+      </a>
+      <a href="#controladoria" class="pg-jump-card">
+        <div class="pg-jump-num">02</div>
+        <div class="pg-jump-name">Controladoria e Indicadores</div>
+      </a>
+      <a href="#consultoria" class="pg-jump-card">
+        <div class="pg-jump-num">03</div>
+        <div class="pg-jump-name">Consultoria Estratégica</div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- 01 — BPO Financeiro -->
+<section class="feature-section" id="bpo">
+  <div class="container">
+    <div class="feature-row reveal" style="padding-top:96px;">
+      <div class="feature-content">
+        <span class="feature-num">01 · BPO Financeiro</span>
+        <h2 class="feature-title">A operação financeira no lugar certo.</h2>
+        <p class="feature-desc">O BPO Financeiro da Lucri assume o dia a dia financeiro da sua empresa. Das contas a pagar ao controle bancário — tudo organizado, automatizado e sem você precisar se preocupar com cada detalhe.</p>
+        <ul class="feature-items">
+          <li>Implantação de sistema de gestão financeira, sem custo adicional de tecnologia</li>
+          <li>Controle de contas a pagar e a receber, categorizado e dentro do prazo</li>
+          <li>Cobranças e conciliação bancária automatizada, sem divergência com o banco</li>
+          <li>Organização de documentos e dados — tudo pronto pra contabilidade, sem correria de fechamento</li>
+        </ul>
+        <a href="https://wa.me/5541992423755?text=Ol%C3%A1!%20Quero%20saber%20mais%20sobre%20o%20BPO%20Financeiro%20da%20Lucri." target="_blank" rel="noopener" class="btn btn-dark">Quero o BPO da Lucri</a>
+      </div>
+      <div class="feature-visual reveal d2">
+        <div class="feature-mockup">
+          <div class="mock-topbar">
+            <span class="mock-topbar-title">Gestão de Contas · Maio</span>
+            <span class="mock-badge mock-badge-green">Em dia</span>
+          </div>
+          <div class="mock-body">
+            <div class="mock-row"><span class="mock-row-label">Aluguel comercial</span><span class="mock-row-val">R$ 5.000</span><span class="mock-row-status ok">✓ pago</span></div>
+            <div class="mock-row"><span class="mock-row-label">Fornecedor principal</span><span class="mock-row-val">R$ 12.400</span><span class="mock-row-status ok">✓ pago</span></div>
+            <div class="mock-row"><span class="mock-row-label">Folha de pagamento</span><span class="mock-row-val">R$ 18.300</span><span class="mock-row-status ok">✓ pago</span></div>
+            <div class="mock-row"><span class="mock-row-label">Energia elétrica</span><span class="mock-row-val">R$ 1.240</span><span class="mock-row-status pend">→ agendado</span></div>
+            <div class="mock-row"><span class="mock-row-label">Impostos</span><span class="mock-row-val">R$ 6.820</span><span class="mock-row-status pend">→ agendado</span></div>
+          </div>
+          <div class="mock-foot"><span class="mock-foot-label">Total gerido no mês</span><span class="mock-foot-val">R$ 43.760</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 02 — Controladoria -->
+<section class="feature-section-alt" id="controladoria">
+  <div class="container">
+    <div class="feature-row feature-row--rev reveal">
+      <div class="feature-content">
+        <span class="feature-num">02 · Controladoria e Indicadores</span>
+        <h2 class="feature-title">Você vai saber onde está o seu dinheiro.</h2>
+        <p class="feature-desc">Faturamento não paga conta. Lucro paga. A Controladoria da Lucri traduz os números do seu negócio em informação clara — pra você decidir com dado, não com achismo.</p>
+        <ul class="feature-items">
+          <li>Visão de lucros e resultados: relatório mensal completo pros sócios</li>
+          <li>Planejamento e projeção do fluxo de caixa, sem surpresa no fim do mês</li>
+          <li>Análise de precificação e ponto de equilíbrio — saiba se o preço realmente paga tudo</li>
+          <li>Relatório gerencial: DRE, CMV, margem de contribuição, EBITDA explicados sem contabilês</li>
+        </ul>
+        <a href="https://wa.me/5541992423755?text=Ol%C3%A1!%20Quero%20saber%20mais%20sobre%20a%20Controladoria%20e%20Indicadores%20da%20Lucri." target="_blank" rel="noopener" class="btn btn-dark">Quero clareza nos números</a>
+      </div>
+      <div class="feature-visual reveal d2">
+        <div class="feature-mockup">
+          <div class="mock-topbar">
+            <span class="mock-topbar-title">Relatório Gerencial · Abril</span>
+            <span class="mock-badge mock-badge-blue">Mês fechado</span>
+          </div>
+          <div class="mock-kpis">
+            <div class="mock-kpi"><span class="mock-kpi-label">Faturamento bruto</span><div><span class="mock-kpi-val">R$ 182.400</span><span class="mock-kpi-tag up">+12%</span></div></div>
+            <div class="mock-kpi"><span class="mock-kpi-label">Margem Líquida</span><div><span class="mock-kpi-val">18,4%</span><span class="mock-kpi-tag up">+2,1pp</span></div></div>
+            <div class="mock-kpi"><span class="mock-kpi-label">Ponto de Equilíbrio</span><div><span class="mock-kpi-val">R$ 97k</span><span class="mock-kpi-tag neu">✓ atingido</span></div></div>
+            <div class="mock-kpi"><span class="mock-kpi-label">Resultado líquido</span><div><span class="mock-kpi-val">R$ 33.561</span><span class="mock-kpi-tag up">+R$ 4.890</span></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 03 — Consultoria -->
+<section class="feature-section" id="consultoria">
+  <div class="container">
+    <div class="feature-row reveal" style="padding-bottom:96px;">
+      <div class="feature-content">
+        <span class="feature-num">03 · Consultoria Estratégica</span>
+        <h2 class="feature-title">Decisão de negócio com segurança.</h2>
+        <p class="feature-desc">Aqui a Lucri deixa de ser só "financeiro" e vira sócio estratégico. Presente nas decisões que mais importam: quando contratar, quando investir, quando buscar crédito, quando cortar.</p>
+        <ul class="feature-items">
+          <li>Relacionamento com bancos, contabilidade e parceiros — tudo intermediado</li>
+          <li>Investimentos PJ e planejamento de crédito, sem colocar o negócio em risco</li>
+          <li>Recomendações diretas de quem conhece os seus números, sem viés emocional</li>
+          <li>Acompanhamento diário via WhatsApp com Guilherme e Izabelle, resposta em até 30 min</li>
+        </ul>
+        <a href="https://wa.me/5541992423755?text=Ol%C3%A1!%20Quero%20saber%20mais%20sobre%20a%20Consultoria%20Estrat%C3%A9gica%20da%20Lucri." target="_blank" rel="noopener" class="btn btn-dark">Quero um sócio estratégico</a>
+      </div>
+      <div class="feature-visual reveal d2">
+        <div class="feature-mockup">
+          <div class="mock-chat-header">
+            <div class="mock-avatar">G</div>
+            <div class="mock-chat-meta"><span class="mock-chat-name">Guilherme · Lucri</span><span class="mock-chat-status">● Online agora</span></div>
+          </div>
+          <div class="mock-messages">
+            <div class="mock-msg-them">Guilherme, o banco me ofereceu um empréstimo com taxa de 1,9%/mês. Vale a pena?</div>
+            <div class="mock-msg-us">Não aceita ainda. 1,9% está acima do necessário para o seu perfil. Tenho uma proposta de 1,2%/mês num banco parceiro. Vou enviar o comparativo hoje à tarde.</div>
+            <div class="mock-msg-time">✓✓ entregue · há 8 min</div>
+          </div>
+          <div class="mock-chat-foot"><span class="mock-chat-foot-text">Tempo médio de resposta: 12 minutos</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- COMO FUNCIONA -->
+<section class="pg-process">
+  <div class="container">
+    <div class="section-header-l reveal">
+      <span class="eyebrow-l">Como funciona</span>
+      <div class="divider-l"></div>
+      <h2 class="title-l">Da primeira conversa ao<br />acompanhamento mensal.</h2>
+    </div>
+    <div class="pg-steps reveal">
+      <div class="pg-step">
+        <div class="pg-step-n">01</div>
+        <div><h3>Conversa</h3><p>Entendemos o seu negócio, os números atuais e onde estão os maiores gargalos financeiros — sem compromisso.</p></div>
+      </div>
+      <div class="pg-step">
+        <div class="pg-step-n">02</div>
+        <div><h3>Onboarding</h3><p>60 a 90 dias mergulhados no seu negócio, estruturando sistemas, organizando dados e resolvendo o que está travando.</p></div>
+      </div>
+      <div class="pg-step">
+        <div class="pg-step-n">03</div>
+        <div><h3>Operação</h3><p>Assumimos o dia a dia financeiro: contas, conciliação, relatórios e comunicação diária pelo WhatsApp.</p></div>
+      </div>
+      <div class="pg-step">
+        <div class="pg-step-n">04</div>
+        <div><h3>Acompanhamento</h3><p>Reunião mensal com relatório completo do período anterior. Você decide com dado real.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SEGMENTOS -->
+<div class="banner-section">
+  <div class="container">
+    <div class="banner-inner">
+      <span class="banner-label">Atendemos empresas em</span>
+      <div class="banner-dots">
+        <span>Alimentação</span>
+        <span>Comércio</span>
+        <span>E-commerce</span>
+        <span>Serviços</span>
+        <span>Saúde e Clínicas</span>
+        <span>Distribuidoras</span>
+        <span>Startups</span>
+        <span>Indústria</span>
+        <span>Educação</span>
+        <span>Beleza e Estética</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CTA FINAL -->
+<section class="pg-cta">
+  <div class="container">
+    <div class="pg-cta-inner reveal">
+      <div class="pg-cta-text">
+        <h2>Qual serviço faz mais sentido<br />para o seu negócio agora?</h2>
+        <p>Fale com a Lucri e descubra o modelo ideal — sem compromisso e sem enrolação.</p>
+      </div>
+      <div class="pg-cta-actions">
+        <a href="contato.html" class="btn btn-primary">Falar com a Lucri</a>
+        <a href="ferramentas.html" class="btn btn-ghost">Ver ferramentas gratuitas</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <img src="images/logo-tagline.png" alt="Lucri Finanças Corporativas" />
+        <p>Empresa de finanças corporativas especializada em BPO Financeiro, Controladoria e Consultoria Estratégica para PMEs.</p>
+      </div>
+      <div class="footer-col">
+        <h4>A empresa</h4>
+        <ul>
+          <li><a href="sobre.html">Quem somos</a></li>
+          <li><a href="sobre.html#socios">Os sócios</a></li>
+          <li><a href="sobre.html#numeros">Histórico</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Serviços</h4>
+        <ul>
+          <li><a href="servicos.html#bpo">BPO Financeiro</a></li>
+          <li><a href="servicos.html#controladoria">Controladoria</a></li>
+          <li><a href="servicos.html#consultoria">Consultoria Estratégica</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Contato</h4>
+        <address>
+          Av. Paraná, 1750 - Sala 17<br />
+          Boa Vista · Curitiba, PR<br /><br />
+          <a href="https://wa.me/5541992423755" target="_blank" rel="noopener">(41) 9 9242-3755</a><br />
+          lucrifinancas@gmail.com
+        </address>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 Lucri Finanças Corporativas. Todos os direitos reservados.</p>
+      <a href="#">Política de Privacidade</a>
+    </div>
+  </div>
+</footer>
+
+<script src="js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ferramentas para Empreendedores | Lucri Finanças Corporativas</title>
+  <meta name="description" content="Calculadoras financeiras gratuitas: ponto de equilíbrio, margem de lucro, markup, capital de giro, CAC e custo real do funcionário." />
+  <link rel="icon" type="image/png" href="images/logo-simbolo.png" />
+  <link rel="canonical" href="https://lucrifinancas.com.br/ferramentas.html" />
+  <meta property="og:type" content="website" />
+  <meta property="og:locale" content="pt_BR" />
+  <meta property="og:url" content="https://lucrifinancas.com.br/ferramentas.html" />
+  <meta property="og:site_name" content="Lucri Finanças Corporativas" />
+  <meta property="og:title" content="Ferramentas para Empreendedores | Lucri Finanças Corporativas" />
+  <meta property="og:description" content="Calculadoras financeiras gratuitas: ponto de equilíbrio, margem de lucro, markup, capital de giro, CAC e custo real do funcionário." />
+  <meta property="og:image" content="https://lucrifinancas.com.br/images/founders.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="1500" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Ferramentas para Empreendedores | Lucri Finanças Corporativas" />
+  <meta name="twitter:description" content="Calculadoras financeiras gratuitas: ponto de equilíbrio, margem de lucro, markup, capital de giro, CAC e custo real do funcionário." />
+  <meta name="twitter:image" content="https://lucrifinancas.com.br/images/founders.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;600;700&family=Montserrat:wght@700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+  <style>
+    .tools-hero {
+      min-height: 44vh; padding: 140px 0 72px;
+      position: relative; display: flex; align-items: center;
+      background: var(--bg); overflow: hidden;
+    }
+    .tools-hero-bg {
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(ellipse 75% 65% at 90% 115%, rgba(0,235,133,0.20) 0%, transparent 52%),
+        radial-gradient(ellipse 55% 45% at 10% 45%, rgba(0,208,245,0.10) 0%, transparent 46%),
+        var(--bg);
+    }
+    .tools-hero-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to right, rgba(1,1,22,0.65) 0%, rgba(1,1,22,0.22) 60%, transparent 100%);
+    }
+    .tools-hero-content { position: relative; z-index: 2; }
+    .tools-badge {
+      display: inline-flex; align-items: center; gap: 7px;
+      padding: 5px 14px; border: 1px solid rgba(0,235,133,0.28); border-radius: 100px;
+      font-size: 0.62rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.18em;
+      color: var(--green); margin-bottom: 24px;
+    }
+    .tools-badge::before {
+      content: ''; width: 5px; height: 5px; border-radius: 50%;
+      background: var(--green); box-shadow: 0 0 6px rgba(0,235,133,0.5);
+    }
+    .tools-hero-title {
+      font-family: var(--font-brand); font-size: clamp(2.2rem, 5vw, 4rem);
+      font-weight: 900; line-height: 1.06; letter-spacing: -0.02em;
+      color: #fff; margin-bottom: 18px; text-wrap: balance;
+    }
+    .tools-hero-title .hl { color: var(--green); }
+    .tools-hero-sub {
+      font-size: 0.97rem; color: var(--muted); line-height: 1.8;
+      max-width: 460px; text-wrap: pretty;
+    }
+
+    /* Directory */
+    .tools-dir { padding: 80px 0 112px; background: var(--bg-la); }
+    .tools-dir-header {
+      display: flex; align-items: flex-end; justify-content: space-between;
+      gap: 32px; margin-bottom: 48px; padding-bottom: 36px;
+      border-bottom: 1px solid var(--border-l);
+    }
+    .tools-dir-header h2 {
+      font-size: clamp(1.4rem, 2.4vw, 1.9rem); font-weight: 800;
+      color: var(--text-l); letter-spacing: -0.02em; margin-bottom: 6px;
+    }
+    .tools-dir-header p { font-size: 0.86rem; color: var(--muted-l); line-height: 1.8; max-width: 340px; }
+    .tools-dir-num {
+      flex-shrink: 0; font-family: var(--font-brand); font-size: 3rem;
+      font-weight: 900; color: var(--green-d); opacity: 0.16;
+      line-height: 1; letter-spacing: -0.03em; text-align: right;
+    }
+
+    .tools-dir-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
+
+    .tool-card {
+      display: flex; flex-direction: column;
+      background: #fff; border: 1px solid var(--border-l); border-radius: 16px;
+      padding: 28px 30px 24px; text-decoration: none; color: inherit;
+      transition: box-shadow 0.2s, border-color 0.2s, transform 0.18s;
+    }
+    .tool-card:hover {
+      box-shadow: 0 8px 36px rgba(40,38,30,0.09);
+      border-color: rgba(0,143,84,0.22); transform: translateY(-2px);
+    }
+    .tool-card-badge {
+      display: inline-flex; align-items: center; justify-content: center;
+      width: 44px; height: 44px; border-radius: 10px;
+      background: var(--text-l); color: #fff;
+      margin-bottom: 20px; flex-shrink: 0;
+    }
+    .tool-card-title {
+      font-size: 1.05rem; font-weight: 800; color: var(--text-l);
+      line-height: 1.3; margin-bottom: 10px; letter-spacing: -0.01em;
+    }
+    .tool-card-desc {
+      font-size: 0.84rem; color: var(--muted-l); line-height: 1.75;
+      flex: 1; margin-bottom: 22px; text-wrap: pretty;
+    }
+    .tool-card-cta {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-size: 0.82rem; font-weight: 700; color: var(--text-l);
+      transition: color 0.15s, gap 0.15s;
+    }
+    .tool-card:hover .tool-card-cta { color: var(--green-d); gap: 10px; }
+
+    .tool-card-new {
+      grid-column: 1 / -1;
+      background: linear-gradient(135deg, var(--bg) 0%, #010d08 100%);
+      border-color: rgba(0,235,133,0.22);
+      flex-direction: row; align-items: center; gap: 28px;
+      padding: 28px 32px;
+    }
+    .tool-card-new:hover { border-color: rgba(0,235,133,0.45); }
+    .tool-card-new .tool-card-badge { background: var(--green-d); flex-shrink: 0; margin-bottom: 0; }
+    .tool-card-new .tool-card-title { color: #fff; }
+    .tool-card-new .tool-card-desc { color: rgba(255,255,255,0.55); margin-bottom: 0; }
+    .tool-card-new .tool-card-cta { color: var(--green); }
+    .tool-card-new:hover .tool-card-cta { color: #00EB85; gap: 10px; }
+    .tool-card-new-body { flex: 1; display: flex; flex-direction: column; gap: 6px; }
+    .tool-card-new-right { flex-shrink: 0; display: flex; flex-direction: column; align-items: flex-end; gap: 12px; }
+    .tool-new-pill {
+      display: inline-block; font-size: 0.58rem; font-weight: 800;
+      text-transform: uppercase; letter-spacing: 0.14em;
+      background: var(--green); color: #010116;
+      padding: 3px 9px; border-radius: 100px;
+    }
+    @media (max-width: 640px) {
+      .tool-card-new { flex-direction: column; align-items: flex-start; }
+      .tool-card-new-right { align-items: flex-start; }
+    }
+
+    /* CTA */
+    .tools-cta { padding: 80px 0; background: var(--bg-alt); color: #fff; }
+    .tools-cta-inner { display: flex; align-items: center; justify-content: space-between; gap: 48px; }
+    .tools-cta-text h2 {
+      font-size: clamp(1.6rem, 3vw, 2.5rem); font-weight: 800;
+      line-height: 1.15; letter-spacing: -0.02em; margin-bottom: 12px;
+    }
+    .tools-cta-text p { font-size: 0.9rem; color: var(--muted); line-height: 1.8; max-width: 420px; }
+    .tools-cta-actions { display: flex; gap: 12px; flex-shrink: 0; flex-wrap: wrap; }
+
+    @media (max-width: 900px) {
+      .tools-dir-header { flex-direction: column; align-items: flex-start; gap: 12px; }
+      .tools-cta-inner { flex-direction: column; align-items: flex-start; gap: 28px; }
+    }
+    @media (max-width: 640px) {
+      .tools-dir-grid { grid-template-columns: 1fr; }
+      .tools-hero { padding: 120px 0 56px; min-height: auto; }
+    }
+  </style>
+</head>
+<body>
+
+<nav class="nav" id="nav">
+  <div class="container">
+    <a href="index.html" class="nav-logo"><img src="images/logo-horizontal.png" alt="Lucri" /></a>
+    <div class="nav-menu">
+      <nav class="nav-links">
+        <a href="index.html#empresa">A empresa</a>
+        <a href="index.html#servicos">Serviços</a>
+        <a href="index.html#socios">Os sócios</a>
+        <a href="index.html#numeros">Números</a>
+        <a href="ferramentas.html" class="active">Ferramentas</a>
+        <a href="index.html#contato">Contato</a>
+      </nav>
+      <div class="nav-cta">
+        <a href="index.html#contato" class="btn btn-ghost">Fale conosco</a>
+      </div>
+      <button class="nav-hamburger" id="hamburger" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+  <nav class="nav-drawer" id="drawer">
+    <a href="index.html#empresa">A empresa</a>
+    <a href="index.html#servicos">Serviços</a>
+    <a href="index.html#socios">Os sócios</a>
+    <a href="index.html#numeros">Números</a>
+    <a href="ferramentas.html">Ferramentas</a>
+    <a href="index.html#contato">Contato</a>
+    <a href="index.html#contato" class="btn btn-primary" style="margin-top:16px;">Fale conosco</a>
+  </nav>
+</nav>
+
+<section class="tools-hero">
+  <div class="tools-hero-bg"></div>
+  <div class="tools-hero-overlay"></div>
+  <div class="tools-hero-content">
+    <div class="container">
+      <div class="tools-badge">Gratuito</div>
+      <h1 class="tools-hero-title">
+        Ferramentas para<br /><span class="hl">empreendedores</span>
+      </h1>
+      <p class="tools-hero-sub">
+        Calculadoras financeiras prontas para usar. Sem cadastro, sem complicação — só os números que você precisa para decidir melhor.
+      </p>
+    </div>
+  </div>
+</section>
+
+<section class="tools-dir">
+  <div class="container">
+    <div class="tools-dir-header">
+      <div>
+        <h2>Calculadoras financeiras</h2>
+        <p>Selecione uma ferramenta para começar. O resultado aparece na hora, sem cadastro.</p>
+      </div>
+      <div class="tools-dir-num">07</div>
+    </div>
+    <div class="tools-dir-grid">
+
+      <a href="ferramenta-reforma-tributaria.html" class="tool-card tool-card-new">
+        <div class="tool-card-badge">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="8" y1="13" x2="16" y2="13"/><line x1="8" y1="17" x2="13" y2="17"/></svg>
+        </div>
+        <div class="tool-card-new-body">
+          <h2 class="tool-card-title">Simulador da Reforma Tributária (CBS + IBS)</h2>
+          <p class="tool-card-desc">Estime o impacto do novo sistema tributário no seu negócio e compare com a carga atual. Baseado na alíquota máxima de 26,5% em vigor a partir de 2026.</p>
+          <span class="tool-card-cta" style="margin-top:8px;">Simular agora →</span>
+        </div>
+        <div class="tool-card-new-right">
+          <span class="tool-new-pill">Novo</span>
+        </div>
+      </a>
+
+      <a href="ferramenta-ponto-equilibrio.html" class="tool-card">
+        <div class="tool-card-badge">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/><line x1="2" y1="20" x2="22" y2="20"/></svg>
+        </div>
+        <h2 class="tool-card-title">Calculadora de Ponto de Equilíbrio</h2>
+        <p class="tool-card-desc">Descubra qual é o faturamento mínimo para cobrir todos os custos da empresa sem entrar no prejuízo. Planeje suas metas com base em dados reais.</p>
+        <span class="tool-card-cta">Calcular agora →</span>
+      </a>
+
+      <a href="ferramenta-margem-lucro.html" class="tool-card">
+        <div class="tool-card-badge">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
+        </div>
+        <h2 class="tool-card-title">Calculadora de Margem de Lucro</h2>
+        <p class="tool-card-desc">Calcule quanto do seu faturamento realmente sobra depois de pagar todos os custos. Entenda se o negócio está sendo lucrativo de verdade.</p>
+        <span class="tool-card-cta">Calcular agora →</span>
+      </a>
+
+      <a href="ferramenta-markup.html" class="tool-card">
+        <div class="tool-card-badge">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg>
+        </div>
+        <h2 class="tool-card-title">Calculadora de Markup e Precificação</h2>
+        <p class="tool-card-desc">Defina o preço ideal de venda para cobrir custos e garantir a margem desejada. Chega de precificar no chute ou copiar a concorrência.</p>
+        <span class="tool-card-cta">Calcular agora →</span>
+      </a>
+
+      <a href="ferramenta-capital-giro.html" class="tool-card">
+        <div class="tool-card-badge">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg>
+        </div>
+        <h2 class="tool-card-title">Calculadora de Capital de Giro</h2>
+        <p class="tool-card-desc">Descubra quanto dinheiro a empresa precisa ter disponível para operar sem apertar o caixa. Essencial para crescer com segurança financeira.</p>
+        <span class="tool-card-cta">Calcular agora →</span>
+      </a>
+
+      <a href="ferramenta-cac.html" class="tool-card">
+        <div class="tool-card-badge">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="4"/><line x1="12" y1="2" x2="12" y2="8"/><line x1="12" y1="16" x2="12" y2="22"/><line x1="2" y1="12" x2="8" y2="12"/><line x1="16" y1="12" x2="22" y2="12"/></svg>
+        </div>
+        <h2 class="tool-card-title">Calculadora de CAC</h2>
+        <p class="tool-card-desc">Calcule quanto você investe para conquistar cada novo cliente. Otimize sua estratégia de marketing e vendas com dados reais, não com suposições.</p>
+        <span class="tool-card-cta">Calcular agora →</span>
+      </a>
+
+      <a href="ferramenta-custo-funcionario.html" class="tool-card">
+        <div class="tool-card-badge">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        </div>
+        <h2 class="tool-card-title">Calculadora de Custo Real do Funcionário</h2>
+        <p class="tool-card-desc">Saiba o custo total de uma contratação CLT — muito além do salário combinado. Evite surpresas no momento de contratar.</p>
+        <span class="tool-card-cta">Calcular agora →</span>
+      </a>
+
+    </div>
+  </div>
+</section>
+
+<section class="tools-cta">
+  <div class="container">
+    <div class="tools-cta-inner">
+      <div class="tools-cta-text">
+        <h2>Precisa de mais do que<br />uma calculadora?</h2>
+        <p>Esses números são o começo. A Lucri transforma os dados do seu negócio em estratégia financeira real — com BPO, Controladoria e Consultoria integradas.</p>
+      </div>
+      <div class="tools-cta-actions">
+        <a href="index.html#contato" class="btn btn-primary">Fale com a Lucri</a>
+        <a href="index.html#servicos" class="btn btn-ghost">Ver serviços</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <img src="images/logo-tagline.png" alt="Lucri Finanças Corporativas" />
+        <p>Empresa de finanças corporativas especializada em BPO Financeiro, Controladoria e Consultoria Estratégica para PMEs.</p>
+      </div>
+      <div class="footer-col">
+        <h4>A empresa</h4>
+        <ul>
+          <li><a href="index.html#empresa">Quem somos</a></li>
+          <li><a href="index.html#socios">Os sócios</a></li>
+          <li><a href="index.html#numeros">Histórico</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Ferramentas</h4>
+        <ul>
+          <li><a href="ferramenta-ponto-equilibrio.html">Ponto de Equilíbrio</a></li>
+          <li><a href="ferramenta-margem-lucro.html">Margem de Lucro</a></li>
+          <li><a href="ferramenta-markup.html">Markup e Precificação</a></li>
+          <li><a href="ferramenta-capital-giro.html">Capital de Giro</a></li>
+          <li><a href="ferramenta-cac.html">CAC</a></li>
+          <li><a href="ferramenta-custo-funcionario.html">Custo do Funcionário</a></li>
+          <li><a href="ferramenta-reforma-tributaria.html">Reforma Tributária</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Contato</h4>
+        <address>
+          Av. Paraná, 1750 - Sala 17<br />
+          Boa Vista · Curitiba, PR<br /><br />
+          <a href="https://wa.me/5541992423755" target="_blank" rel="noopener">(41) 9 9242-3755</a><br />
+          lucrifinancas@gmail.com
+        </address>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 Lucri Finanças Corporativas. Todos os direitos reservados.</p>
+      <a href="#">Política de Privacidade</a>
+    </div>
+  </div>
+</footer>
+
+<script src="js/main.js"></script>
+</body>
+</html>

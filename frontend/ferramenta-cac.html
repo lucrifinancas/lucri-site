@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Calculadora de CAC | Lucri Finanças Corporativas</title>
+  <meta name="description" content="Calcule o Custo de Aquisição de Cliente (CAC) e descubra quanto você investe para conquistar cada novo cliente." />
+  <link rel="icon" type="image/png" href="images/logo-simbolo.png" />
+  <link rel="canonical" href="https://lucrifinancas.com.br/ferramenta-cac.html" />
+  <meta property="og:type" content="website" />
+  <meta property="og:locale" content="pt_BR" />
+  <meta property="og:url" content="https://lucrifinancas.com.br/ferramenta-cac.html" />
+  <meta property="og:site_name" content="Lucri Finanças Corporativas" />
+  <meta property="og:title" content="Calculadora de CAC | Lucri Finanças Corporativas" />
+  <meta property="og:description" content="Calcule o Custo de Aquisição de Cliente (CAC) e descubra quanto você investe para conquistar cada novo cliente." />
+  <meta property="og:image" content="https://lucrifinancas.com.br/images/founders.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="1500" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Calculadora de CAC | Lucri Finanças Corporativas" />
+  <meta name="twitter:description" content="Calcule o Custo de Aquisição de Cliente (CAC) e descubra quanto você investe para conquistar cada novo cliente." />
+  <meta name="twitter:image" content="https://lucrifinancas.com.br/images/founders.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;600;700&family=Montserrat:wght@700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+  <style>
+    .ferr-hero { padding: 120px 0 64px; position: relative; display: flex; align-items: center; background: var(--bg); overflow: hidden; }
+    .ferr-hero-bg { position: absolute; inset: 0; background: radial-gradient(ellipse 80% 60% at 100% 100%, rgba(0,235,133,0.14) 0%, transparent 50%), var(--bg); }
+    .ferr-hero-overlay { position: absolute; inset: 0; background: linear-gradient(to right, rgba(1,1,22,0.7) 0%, rgba(1,1,22,0.3) 55%, transparent 100%); }
+    .ferr-hero-content { position: relative; z-index: 2; }
+    .ferr-breadcrumb { display: inline-flex; align-items: center; gap: 8px; font-size: 0.78rem; font-weight: 600; color: rgba(255,255,255,0.45); text-decoration: none; margin-bottom: 20px; transition: color 0.15s; }
+    .ferr-breadcrumb:hover { color: rgba(255,255,255,0.8); }
+    .ferr-tag { display: inline-block; font-size: 0.6rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.14em; color: var(--green); border: 1px solid rgba(0,235,133,0.3); padding: 4px 10px; border-radius: 4px; margin-bottom: 14px; }
+    .ferr-title { font-family: var(--font-brand); font-size: clamp(1.9rem, 4.2vw, 3.2rem); font-weight: 900; line-height: 1.08; letter-spacing: -0.02em; color: #fff; margin-bottom: 14px; text-wrap: balance; }
+    .ferr-sub { font-size: 0.95rem; color: var(--muted); line-height: 1.8; max-width: 480px; }
+    .ferr-calc-section { padding: 72px 0 96px; background: var(--bg-la); }
+    .ferr-calc-card { max-width: 580px; margin: 0 auto; background: #fff; border: 1px solid var(--border-l); border-radius: 20px; overflow: hidden; box-shadow: 0 4px 32px rgba(40,38,30,0.07); }
+    .ferr-calc-header { padding: 28px 32px 22px; border-bottom: 1px solid var(--border-l); }
+    .ferr-calc-header h2 { font-size: 1.05rem; font-weight: 800; color: var(--text-l); letter-spacing: -0.01em; margin-bottom: 4px; }
+    .ferr-calc-header p { font-size: 0.8rem; color: var(--muted-l); line-height: 1.65; }
+    .ferr-calc-body { padding: 26px 32px; display: flex; flex-direction: column; gap: 16px; }
+    .calc-field { display: flex; flex-direction: column; gap: 6px; }
+    .calc-field label { font-size: 0.64rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted-l); }
+    .calc-input-wrap { display: flex; align-items: stretch; border: 1px solid var(--border-l); border-radius: var(--r); overflow: hidden; background: var(--bg-l); transition: border-color 0.18s; }
+    .calc-input-wrap:focus-within { border-color: var(--green-d); }
+    .calc-prefix, .calc-suffix { padding: 0 12px; font-size: 0.75rem; font-weight: 700; color: var(--muted-l); background: var(--bg-la); display: flex; align-items: center; user-select: none; }
+    .calc-prefix { border-right: 1px solid var(--border-l); }
+    .calc-suffix { border-left: 1px solid var(--border-l); }
+    .calc-input-wrap input { flex: 1; min-width: 0; border: none; outline: none; background: transparent; padding: 12px 14px; font-family: var(--font); font-size: 0.92rem; font-weight: 600; color: var(--text-l); }
+    .calc-input-wrap input::placeholder { color: var(--muted-l); opacity: 0.4; font-weight: 400; }
+    .calc-input-wrap input[type=number]::-webkit-inner-spin-button, .calc-input-wrap input[type=number]::-webkit-outer-spin-button { -webkit-appearance: none; }
+    .calc-input-wrap input[type=number] { -moz-appearance: textfield; appearance: textfield; }
+    .ferr-calc-result { padding: 22px 32px 28px; background: rgba(0,143,84,0.04); border-top: 1px solid rgba(0,143,84,0.10); }
+    .result-row { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; margin-bottom: 10px; }
+    .result-label { font-size: 0.72rem; font-weight: 600; color: var(--muted-l); }
+    .result-val { font-size: 1.6rem; font-weight: 900; color: var(--green-d); letter-spacing: -0.03em; font-variant-numeric: tabular-nums; }
+    .result-note { font-size: 0.68rem; color: var(--muted-l); line-height: 1.65; }
+    .ferr-content { padding: 80px 0 96px; background: var(--bg-l); }
+    .ferr-content-inner { max-width: 680px; margin: 0 auto; }
+    .ferr-content-inner h2 { font-size: 1.25rem; font-weight: 800; color: var(--text-l); letter-spacing: -0.02em; margin: 0 0 12px; text-wrap: balance; }
+    .ferr-content-inner h2:not(:first-child) { margin-top: 52px; }
+    .ferr-content-inner p { font-size: 0.92rem; color: var(--muted-l); line-height: 1.88; margin-bottom: 14px; text-wrap: pretty; }
+    .ferr-content-inner strong { color: var(--text-l); font-weight: 700; }
+    .ferr-formula { background: var(--bg-la); border: 1px solid var(--border-l); border-radius: 10px; padding: 16px 20px; margin: 16px 0 20px; font-size: 0.9rem; font-weight: 700; color: var(--text-l); font-family: monospace; line-height: 1.6; }
+    .ferr-cta { padding: 80px 0; background: var(--bg-alt); color: #fff; }
+    .ferr-cta-inner { display: flex; align-items: center; justify-content: space-between; gap: 48px; }
+    .ferr-cta-text h2 { font-size: clamp(1.5rem, 2.8vw, 2.2rem); font-weight: 800; line-height: 1.15; letter-spacing: -0.02em; margin-bottom: 10px; }
+    .ferr-cta-text p { font-size: 0.88rem; color: var(--muted); line-height: 1.8; max-width: 380px; }
+    .ferr-cta-actions { display: flex; gap: 12px; flex-shrink: 0; flex-wrap: wrap; }
+    @media (max-width: 860px) { .ferr-cta-inner { flex-direction: column; align-items: flex-start; gap: 28px; } }
+    @media (max-width: 640px) { .ferr-hero { padding: 110px 0 48px; } .ferr-calc-header, .ferr-calc-body, .ferr-calc-result { padding-left: 20px; padding-right: 20px; } }
+  </style>
+</head>
+<body>
+
+<nav class="nav" id="nav">
+  <div class="container">
+    <a href="index.html" class="nav-logo"><img src="images/logo-horizontal.png" alt="Lucri" /></a>
+    <div class="nav-menu">
+      <nav class="nav-links">
+        <a href="index.html#empresa">A empresa</a><a href="index.html#servicos">Serviços</a><a href="index.html#socios">Os sócios</a><a href="index.html#numeros">Números</a>
+        <a href="ferramentas.html" class="active">Ferramentas</a><a href="index.html#contato">Contato</a>
+      </nav>
+      <div class="nav-cta"><a href="index.html#contato" class="btn btn-ghost">Fale conosco</a></div>
+      <button class="nav-hamburger" id="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+  <nav class="nav-drawer" id="drawer">
+    <a href="index.html#empresa">A empresa</a><a href="index.html#servicos">Serviços</a><a href="index.html#socios">Os sócios</a><a href="index.html#numeros">Números</a><a href="ferramentas.html">Ferramentas</a><a href="index.html#contato">Contato</a>
+    <a href="index.html#contato" class="btn btn-primary" style="margin-top:16px;">Fale conosco</a>
+  </nav>
+</nav>
+
+<section class="ferr-hero">
+  <div class="ferr-hero-bg"></div><div class="ferr-hero-overlay"></div>
+  <div class="ferr-hero-content">
+    <div class="container">
+      <a href="ferramentas.html" class="ferr-breadcrumb">← Todas as ferramentas</a>
+      <div class="ferr-tag">Marketing · Vendas</div>
+      <h1 class="ferr-title">Calculadora de CAC</h1>
+      <p class="ferr-sub">Calcule quanto você investe para conquistar cada novo cliente e avalie a eficiência das suas ações de marketing e vendas.</p>
+    </div>
+  </div>
+</section>
+
+<section class="ferr-calc-section">
+  <div class="container">
+    <div class="ferr-calc-card">
+      <div class="ferr-calc-header">
+        <h2>Custo de Aquisição de Cliente</h2>
+        <p>Informe o total investido em marketing e vendas e o número de novos clientes conquistados no período.</p>
+      </div>
+      <div class="ferr-calc-body">
+        <div class="calc-field">
+          <label>Investimento em marketing e vendas</label>
+          <div class="calc-input-wrap"><span class="calc-prefix">R$</span><input type="number" id="cac-invest" placeholder="5.000" min="0" /></div>
+        </div>
+        <div class="calc-field">
+          <label>Novos clientes no período</label>
+          <div class="calc-input-wrap"><input type="number" id="cac-clientes" placeholder="8" min="1" /><span class="calc-suffix">clientes</span></div>
+        </div>
+      </div>
+      <div class="ferr-calc-result">
+        <div class="result-row">
+          <span class="result-label">Custo por Cliente (CAC)</span>
+          <span class="result-val" id="cac-result">R$ —</span>
+        </div>
+        <p class="result-note">Para ser sustentável, o CAC precisa ser menor que o valor que cada cliente gera no longo prazo (LTV).</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="ferr-content">
+  <div class="container">
+    <div class="ferr-content-inner">
+
+      <h2>O que é CAC?</h2>
+      <p>O Custo de Aquisição de Cliente (CAC) é o total que a empresa gasta, em média, para conquistar um novo cliente. Ele engloba todos os investimentos em marketing e vendas do período: anúncios, salários da equipe comercial, eventos, ferramentas e tudo mais que contribuiu para gerar novos clientes.</p>
+
+      <h2>Como calcular</h2>
+      <div class="ferr-formula">CAC = Investimento total em marketing e vendas ÷ Número de novos clientes</div>
+      <p><strong>Exemplo:</strong> investimento de R$ 5.000 em um mês com 8 novos clientes. CAC = R$ 5.000 ÷ 8 = <strong>R$ 625 por cliente</strong>. Se o cliente gera em média R$ 3.000 de receita, a relação é saudável.</p>
+
+      <h2>CAC e LTV: a relação que define o negócio</h2>
+      <p>O CAC sozinho não diz se a empresa é saudável — ele precisa ser comparado com o <strong>Lifetime Value (LTV)</strong>, o valor total que um cliente gera durante todo o relacionamento com a empresa. A regra geral: o LTV deve ser pelo menos 3 vezes maior que o CAC para o negócio ser sustentável.</p>
+      <p>Um CAC alto pode ser aceitável se o cliente for recorrente e de ticket elevado. Um CAC baixo pode ser problema se os clientes comprarem uma única vez e nunca voltarem.</p>
+
+    </div>
+  </div>
+</section>
+
+<section class="ferr-cta">
+  <div class="container">
+    <div class="ferr-cta-inner">
+      <div class="ferr-cta-text">
+        <h2>O CAC ficou mais alto<br />do que deveria?</h2>
+        <p>Se o resultado preocupou ou você quer entender como reduzir o custo de aquisição sem cortar investimentos — a Lucri está aqui para ajudar. Fale com a gente.</p>
+      </div>
+      <div class="ferr-cta-actions">
+        <a href="index.html#contato" class="btn btn-primary">Falar com a Lucri</a>
+        <a href="ferramentas.html" class="btn btn-ghost">Ver todas as ferramentas</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="footer-top">
+      <div class="footer-brand"><img src="images/logo-tagline.png" alt="Lucri Finanças Corporativas" /><p>Empresa de finanças corporativas especializada em BPO Financeiro, Controladoria e Consultoria Estratégica para PMEs.</p></div>
+      <div class="footer-col"><h4>A empresa</h4><ul><li><a href="index.html#empresa">Quem somos</a></li><li><a href="index.html#socios">Os sócios</a></li><li><a href="index.html#numeros">Histórico</a></li></ul></div>
+      <div class="footer-col"><h4>Ferramentas</h4><ul><li><a href="ferramenta-ponto-equilibrio.html">Ponto de Equilíbrio</a></li><li><a href="ferramenta-margem-lucro.html">Margem de Lucro</a></li><li><a href="ferramenta-markup.html">Markup e Precificação</a></li><li><a href="ferramenta-capital-giro.html">Capital de Giro</a></li><li><a href="ferramenta-cac.html">CAC</a></li><li><a href="ferramenta-custo-funcionario.html">Custo do Funcionário</a></li><li><a href="ferramenta-reforma-tributaria.html">Reforma Tributária</a></li></ul></div>
+      <div class="footer-col"><h4>Contato</h4><address>Av. Paraná, 1750 - Sala 17<br />Boa Vista · Curitiba, PR<br /><br /><a href="https://wa.me/5541992423755" target="_blank" rel="noopener">(41) 9 9242-3755</a><br />lucrifinancas@gmail.com</address></div>
+    </div>
+    <div class="footer-bottom"><p>© 2026 Lucri Finanças Corporativas. Todos os direitos reservados.</p><a href="#">Política de Privacidade</a></div>
+  </div>
+</footer>
+
+<script src="js/main.js"></script>
+<script>
+const fmt = (n) => n.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+const val = (id) => parseFloat(document.getElementById(id)?.value) || 0;
+function calcCAC() {
+  const invest = val('cac-invest'), clientes = val('cac-clientes');
+  document.getElementById('cac-result').textContent = (invest > 0 && clientes > 0)
+    ? fmt(invest / clientes) : 'R$ —';
+}
+['cac-invest', 'cac-clientes'].forEach(id => document.getElementById(id)?.addEventListener('input', calcCAC));
+</script>
+</body>
+</html>
