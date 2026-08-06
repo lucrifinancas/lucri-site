@@ -145,19 +145,7 @@
             <span class="calc-suffix">%</span>
           </div>
         </div>
-      </div>
-      <div class="ferr-calc-result">
-        <div class="result-rows">
-          <div class="result-row">
-            <span class="result-label">Preço de Venda</span>
-            <span class="result-val" id="mk-preco">R$ —</span>
-          </div>
-          <div class="result-row">
-            <span class="result-label">Markup</span>
-            <span class="result-val sec" id="mk-markup">—</span>
-          </div>
-        </div>
-        <p class="result-note">Markup é o multiplicador aplicado ao custo puro para chegar ao preço de venda.</p>
+        <button type="button" id="mk-btn-calcular" class="btn btn-primary btn-calc">Calcular</button>
       </div>
     </div>
   </div>
@@ -186,21 +174,6 @@
   </div>
 </section>
 
-<section class="ferr-cta">
-  <div class="container">
-    <div class="ferr-cta-inner">
-      <div class="ferr-cta-text">
-        <h2>O preço calculado não<br />cabe no seu mercado?</h2>
-        <p>Se o resultado não pareceu viável ou você quer entender como ajustar sua estrutura de custos para precificar melhor — a Lucri está aqui para ajudar. Fale com a gente.</p>
-      </div>
-      <div class="ferr-cta-actions">
-        <a href="index.html#contato" class="btn btn-primary">Falar com a Lucri</a>
-        <a href="ferramentas.html" class="btn btn-ghost">Ver todas as ferramentas</a>
-      </div>
-    </div>
-  </div>
-</section>
-
 <footer>
   <div class="container">
     <div class="footer-top">
@@ -213,28 +186,53 @@
   </div>
 </footer>
 
+<div class="result-modal-overlay" id="result-modal-overlay">
+  <div class="result-modal">
+    <button class="result-modal-close" id="result-modal-close" aria-label="Fechar">&times;</button>
+    <div class="result-modal-body" id="result-modal-body"></div>
+    <div class="result-modal-actions">
+      <a href="index.html#contato" class="btn btn-primary">Falar com a Lucri</a>
+      <a href="index.html#contato" class="btn btn-ghost-dark">Preencher formulário</a>
+    </div>
+  </div>
+</div>
+
 <script src="js/main.js"></script>
 <script>
 const fmt  = (n) => n.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
 const fmtX = (n) => n.toFixed(2).replace('.', ',') + 'x';
 const val  = (id) => parseFloat(document.getElementById(id)?.value) || 0;
-function set(id, text, cls) { const el = document.getElementById(id); if (!el) return; el.textContent = text; el.className = 'result-val' + (cls ? ' ' + cls : ''); }
 function calcMK() {
   const custo  = val('mk-custo');
   const desp   = val('mk-desp');
   const lucroD = val('mk-lucro-d');
-  if (custo > 0) {
-    const soma = desp + lucroD;
-    if (soma >= 100) { set('mk-preco', 'Percentuais inválidos'); set('mk-markup', '—', 'sec'); return; }
-    const preco  = custo / (1 - soma / 100);
-    set('mk-preco',  fmt(preco));
-    set('mk-markup', fmtX(preco / custo), 'sec');
-  } else {
-    set('mk-preco', 'R$ —');
-    set('mk-markup', '—', 'sec');
+  if (custo <= 0) {
+    openResultModal('<p class="result-placeholder">Preencha os campos para calcular.</p>');
+    return;
   }
+  const soma = desp + lucroD;
+  if (soma >= 100) {
+    openResultModal('<p class="result-placeholder">Percentuais inválidos — a soma de despesas e lucro desejado não pode chegar a 100%.</p>');
+    return;
+  }
+  const preco = custo / (1 - soma / 100);
+  const html = `
+    <div class="result-rows">
+      <div class="result-row">
+        <span class="result-label">Preço de Venda</span>
+        <span class="result-val">${fmt(preco)}</span>
+      </div>
+      <div class="result-row">
+        <span class="result-label">Markup</span>
+        <span class="result-val sec">${fmtX(preco / custo)}</span>
+      </div>
+    </div>
+    <p class="result-note">Markup é o multiplicador aplicado ao custo puro para chegar ao preço de venda.</p>
+    <p class="result-modal-message">Quer entender o que fazer com esse número? A Lucri te ajuda a agir sobre ele.</p>
+  `;
+  openResultModal(html);
 }
-['mk-custo', 'mk-desp', 'mk-lucro-d'].forEach(id => document.getElementById(id)?.addEventListener('input', calcMK));
+document.getElementById('mk-btn-calcular')?.addEventListener('click', calcMK);
 </script>
 </body>
 </html>

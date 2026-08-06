@@ -122,28 +122,7 @@
           <label>Salário Bruto</label>
           <div class="calc-input-wrap"><span class="calc-prefix">R$</span><input type="number" id="func-salario" placeholder="3.000" min="0" /></div>
         </div>
-      </div>
-      <div class="ferr-calc-result">
-        <div class="result-rows">
-          <div class="result-row">
-            <span class="result-label">FGTS (8%)</span>
-            <span class="result-val sec" id="func-fgts">R$ —</span>
-          </div>
-          <div class="result-row">
-            <span class="result-label">INSS patronal + encargos (~26,8%)</span>
-            <span class="result-val sec" id="func-inss">R$ —</span>
-          </div>
-          <div class="result-row">
-            <span class="result-label">13º + férias + 1/3 (~19,44%)</span>
-            <span class="result-val sec" id="func-ferias">R$ —</span>
-          </div>
-          <hr class="result-divider" />
-          <div class="result-row">
-            <span class="result-label">Custo total mensal</span>
-            <span class="result-val" id="func-total">R$ —</span>
-          </div>
-        </div>
-        <p class="result-note">Um salário de R$ 3.000 custa, na prática, cerca de R$ 4.600 para a empresa — aproximadamente 1,54x o valor combinado.</p>
+        <button type="button" id="func-btn-calcular" class="btn btn-primary btn-calc">Calcular</button>
       </div>
     </div>
   </div>
@@ -180,21 +159,6 @@
   </div>
 </section>
 
-<section class="ferr-cta">
-  <div class="container">
-    <div class="ferr-cta-inner">
-      <div class="ferr-cta-text">
-        <h2>A contratação ficou fora<br />do seu orçamento?</h2>
-        <p>Se o custo real surpreendeu ou você não sabe como estruturar a folha de forma que caiba no financeiro — a Lucri está aqui para ajudar. A gente resolve junto com você.</p>
-      </div>
-      <div class="ferr-cta-actions">
-        <a href="index.html#contato" class="btn btn-primary">Falar com a Lucri</a>
-        <a href="ferramentas.html" class="btn btn-ghost">Ver todas as ferramentas</a>
-      </div>
-    </div>
-  </div>
-</section>
-
 <footer>
   <div class="container">
     <div class="footer-top">
@@ -207,25 +171,54 @@
   </div>
 </footer>
 
+<div class="result-modal-overlay" id="result-modal-overlay">
+  <div class="result-modal">
+    <button class="result-modal-close" id="result-modal-close" aria-label="Fechar">&times;</button>
+    <div class="result-modal-body" id="result-modal-body"></div>
+    <div class="result-modal-actions">
+      <a href="index.html#contato" class="btn btn-primary">Falar com a Lucri</a>
+      <a href="index.html#contato" class="btn btn-ghost-dark">Preencher formulário</a>
+    </div>
+  </div>
+</div>
+
 <script src="js/main.js"></script>
 <script>
 const fmt = (n) => n.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
 const val = (id) => parseFloat(document.getElementById(id)?.value) || 0;
-function set(id, text, cls) { const el = document.getElementById(id); if (!el) return; el.textContent = text; el.className = 'result-val' + (cls ? ' ' + cls : ''); }
 function calcFunc() {
   const s = val('func-salario');
-  if (s > 0) {
-    const fgts = s * 0.08, inss = s * 0.268, ferias = s * 0.1944, total = s + fgts + inss + ferias;
-    set('func-fgts',   fmt(fgts),   'sec');
-    set('func-inss',   fmt(inss),   'sec');
-    set('func-ferias', fmt(ferias), 'sec');
-    set('func-total',  fmt(total));
-  } else {
-    ['func-fgts', 'func-inss', 'func-ferias'].forEach(id => set(id, 'R$ —', 'sec'));
-    set('func-total', 'R$ —');
+  if (s <= 0) {
+    openResultModal('<p class="result-placeholder">Preencha o salário para calcular.</p>');
+    return;
   }
+  const fgts = s * 0.08, inss = s * 0.268, ferias = s * 0.1944, total = s + fgts + inss + ferias;
+  const html = `
+    <div class="result-rows">
+      <div class="result-row">
+        <span class="result-label">FGTS (8%)</span>
+        <span class="result-val sec">${fmt(fgts)}</span>
+      </div>
+      <div class="result-row">
+        <span class="result-label">INSS patronal + encargos (~26,8%)</span>
+        <span class="result-val sec">${fmt(inss)}</span>
+      </div>
+      <div class="result-row">
+        <span class="result-label">13º + férias + 1/3 (~19,44%)</span>
+        <span class="result-val sec">${fmt(ferias)}</span>
+      </div>
+      <hr class="result-divider" />
+      <div class="result-row">
+        <span class="result-label">Custo total mensal</span>
+        <span class="result-val">${fmt(total)}</span>
+      </div>
+    </div>
+    <p class="result-note">Um salário de R$ 3.000 custa, na prática, cerca de R$ 4.600 para a empresa — aproximadamente 1,54x o valor combinado.</p>
+    <p class="result-modal-message">Quer entender o que fazer com esse número? A Lucri te ajuda a agir sobre ele.</p>
+  `;
+  openResultModal(html);
 }
-document.getElementById('func-salario')?.addEventListener('input', calcFunc);
+document.getElementById('func-btn-calcular')?.addEventListener('click', calcFunc);
 </script>
 </body>
 </html>

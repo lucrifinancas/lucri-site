@@ -129,13 +129,7 @@
           <label>Prazo médio de pagamento</label>
           <div class="calc-input-wrap"><input type="number" id="cg-pgto" placeholder="15" min="0" max="365" /><span class="calc-suffix">dias</span></div>
         </div>
-      </div>
-      <div class="ferr-calc-result">
-        <div class="result-row">
-          <span class="result-label">Capital de Giro necessário</span>
-          <span class="result-val" id="cg-result">R$ —</span>
-        </div>
-        <p class="result-note">Quanto maior o prazo de recebimento e menor o de pagamento, mais capital você precisa em caixa.</p>
+        <button type="button" id="cg-btn-calcular" class="btn btn-primary btn-calc">Calcular</button>
       </div>
     </div>
   </div>
@@ -164,21 +158,6 @@
   </div>
 </section>
 
-<section class="ferr-cta">
-  <div class="container">
-    <div class="ferr-cta-inner">
-      <div class="ferr-cta-text">
-        <h2>O capital de giro ficou<br />alto demais?</h2>
-        <p>Se o resultado preocupou ou você não sabe como financiar esse gap sem recorrer a empréstimos caros — a Lucri está aqui para ajudar. A gente encontra o caminho junto com você.</p>
-      </div>
-      <div class="ferr-cta-actions">
-        <a href="index.html#contato" class="btn btn-primary">Falar com a Lucri</a>
-        <a href="ferramentas.html" class="btn btn-ghost">Ver todas as ferramentas</a>
-      </div>
-    </div>
-  </div>
-</section>
-
 <footer>
   <div class="container">
     <div class="footer-top">
@@ -191,17 +170,38 @@
   </div>
 </footer>
 
+<div class="result-modal-overlay" id="result-modal-overlay">
+  <div class="result-modal">
+    <button class="result-modal-close" id="result-modal-close" aria-label="Fechar">&times;</button>
+    <div class="result-modal-body" id="result-modal-body"></div>
+    <div class="result-modal-actions">
+      <a href="index.html#contato" class="btn btn-primary">Falar com a Lucri</a>
+      <a href="index.html#contato" class="btn btn-ghost-dark">Preencher formulário</a>
+    </div>
+  </div>
+</div>
+
 <script src="js/main.js"></script>
 <script>
 const fmt = (n) => n.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
 const val = (id) => parseFloat(document.getElementById(id)?.value) || 0;
 function calcCG() {
   const fat = val('cg-fat'), receb = val('cg-receb'), pgto = val('cg-pgto');
-  document.getElementById('cg-result').textContent = fat > 0
-    ? fmt((fat / 30) * Math.max(0, receb - pgto))
-    : 'R$ —';
+  if (fat <= 0) {
+    openResultModal('<p class="result-placeholder">Preencha os campos para calcular.</p>');
+    return;
+  }
+  const html = `
+    <div class="result-row">
+      <span class="result-label">Capital de Giro necessário</span>
+      <span class="result-val">${fmt((fat / 30) * Math.max(0, receb - pgto))}</span>
+    </div>
+    <p class="result-note">Quanto maior o prazo de recebimento e menor o de pagamento, mais capital você precisa em caixa.</p>
+    <p class="result-modal-message">Quer entender o que fazer com esse número? A Lucri te ajuda a agir sobre ele.</p>
+  `;
+  openResultModal(html);
 }
-['cg-fat', 'cg-receb', 'cg-pgto'].forEach(id => document.getElementById(id)?.addEventListener('input', calcCG));
+document.getElementById('cg-btn-calcular')?.addEventListener('click', calcCG);
 </script>
 </body>
 </html>

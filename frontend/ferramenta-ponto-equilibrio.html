@@ -220,13 +220,7 @@
             <span class="calc-suffix">%</span>
           </div>
         </div>
-      </div>
-      <div class="ferr-calc-result">
-        <div class="result-row">
-          <span class="result-label">Faturamento de equilíbrio</span>
-          <span class="result-val" id="pe-result">R$ —</span>
-        </div>
-        <p class="result-note">Abaixo desse valor, a empresa opera no prejuízo, independente do quanto você vende.</p>
+        <button type="button" id="pe-btn-calcular" class="btn btn-primary btn-calc">Calcular</button>
       </div>
     </div>
   </div>
@@ -249,21 +243,6 @@
       <p>É quanto sobra de cada venda depois de subtrair os custos variáveis (matéria-prima, comissões, impostos sobre a venda). Uma margem de 35% significa que, para cada R$ 100 faturados, R$ 35 contribuem para cobrir os custos fixos e gerar lucro.</p>
       <p>Se você não souber sua margem de contribuição exata, use a <a href="ferramenta-margem-lucro.html" style="color:var(--green-d);font-weight:600;">Calculadora de Margem de Lucro</a> como ponto de partida.</p>
 
-    </div>
-  </div>
-</section>
-
-<section class="ferr-cta">
-  <div class="container">
-    <div class="ferr-cta-inner">
-      <div class="ferr-cta-text">
-        <h2>O resultado não fez sentido<br />para o seu negócio?</h2>
-        <p>Se o ponto de equilíbrio pareceu alto demais, ou você quer entender como reduzi-lo na prática — a Lucri está aqui para ajudar. Às vezes um número sozinho não conta a história toda.</p>
-      </div>
-      <div class="ferr-cta-actions">
-        <a href="index.html#contato" class="btn btn-primary">Falar com a Lucri</a>
-        <a href="ferramentas.html" class="btn btn-ghost">Ver todas as ferramentas</a>
-      </div>
     </div>
   </div>
 </section>
@@ -312,6 +291,17 @@
   </div>
 </footer>
 
+<div class="result-modal-overlay" id="result-modal-overlay">
+  <div class="result-modal">
+    <button class="result-modal-close" id="result-modal-close" aria-label="Fechar">&times;</button>
+    <div class="result-modal-body" id="result-modal-body"></div>
+    <div class="result-modal-actions">
+      <a href="index.html#contato" class="btn btn-primary">Falar com a Lucri</a>
+      <a href="index.html#contato" class="btn btn-ghost-dark">Preencher formulário</a>
+    </div>
+  </div>
+</div>
+
 <script src="js/main.js"></script>
 <script>
 const fmt = (n) => n.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
@@ -319,12 +309,21 @@ const val = (id) => parseFloat(document.getElementById(id)?.value) || 0;
 function calcPE() {
   const fixos  = val('pe-fixos');
   const margem = val('pe-margem');
-  const el = document.getElementById('pe-result');
-  el.textContent = (fixos > 0 && margem > 0 && margem < 100)
-    ? fmt(fixos / (margem / 100))
-    : 'R$ —';
+  if (!(fixos > 0 && margem > 0 && margem < 100)) {
+    openResultModal('<p class="result-placeholder">Preencha os campos para calcular.</p>');
+    return;
+  }
+  const html = `
+    <div class="result-row">
+      <span class="result-label">Faturamento de equilíbrio</span>
+      <span class="result-val">${fmt(fixos / (margem / 100))}</span>
+    </div>
+    <p class="result-note">Abaixo desse valor, a empresa opera no prejuízo, independente do quanto você vende.</p>
+    <p class="result-modal-message">Quer entender o que fazer com esse número? A Lucri te ajuda a agir sobre ele.</p>
+  `;
+  openResultModal(html);
 }
-['pe-fixos', 'pe-margem'].forEach(id => document.getElementById(id)?.addEventListener('input', calcPE));
+document.getElementById('pe-btn-calcular')?.addEventListener('click', calcPE);
 </script>
 </body>
 </html>

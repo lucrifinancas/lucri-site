@@ -66,6 +66,25 @@ document.querySelectorAll('.faq-item').forEach((item) => {
   });
 });
 
+/* ── Modal de resultado (páginas de ferramentas) ───── */
+const resultModalOverlay = document.getElementById('result-modal-overlay');
+const resultModalBody    = document.getElementById('result-modal-body');
+const resultModalClose   = document.getElementById('result-modal-close');
+
+window.openResultModal = (html) => {
+  if (!resultModalOverlay || !resultModalBody) return;
+  resultModalBody.innerHTML = html;
+  resultModalOverlay.classList.add('active');
+  document.body.style.overflow = 'hidden';
+};
+const closeResultModal = () => {
+  resultModalOverlay?.classList.remove('active');
+  document.body.style.overflow = '';
+};
+resultModalClose?.addEventListener('click', closeResultModal);
+resultModalOverlay?.addEventListener('click', (e) => { if (e.target === resultModalOverlay) closeResultModal(); });
+document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeResultModal(); });
+
 /* ── Formulário → WhatsApp ─────────────────────────── */
 const form = document.getElementById('form-contato');
 if (form) {

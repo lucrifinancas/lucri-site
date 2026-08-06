@@ -266,10 +266,8 @@
           <span class="hint">Usado para estimar a carga atual de comparação.</span>
         </div>
 
-      </div>
+        <button type="button" id="btn-calcular" class="btn btn-primary btn-calc">Calcular</button>
 
-      <div class="ferr-calc-result" id="result-area">
-        <p class="result-placeholder">Preencha os campos acima para ver a estimativa.</p>
       </div>
     </div>
   </div>
@@ -367,21 +365,6 @@
   </div>
 </section>
 
-<section class="ferr-cta">
-  <div class="container">
-    <div class="ferr-cta-inner">
-      <div class="ferr-cta-text">
-        <h2>A simulação gerou dúvidas<br />ou preocupação?</h2>
-        <p>A reforma já está em vigor. Entender o impacto real no seu negócio — incluindo a escolha entre as opções do Simples — exige análise dos seus dados concretos. A Lucri está aqui para ajudar.</p>
-      </div>
-      <div class="ferr-cta-actions">
-        <a href="index.html#contato" class="btn btn-primary">Falar com a Lucri</a>
-        <a href="ferramentas.html" class="btn btn-ghost">Ver todas as ferramentas</a>
-      </div>
-    </div>
-  </div>
-</section>
-
 <footer>
   <div class="container">
     <div class="footer-top">
@@ -402,6 +385,17 @@
   </div>
 </footer>
 
+<div class="result-modal-overlay" id="result-modal-overlay">
+  <div class="result-modal">
+    <button class="result-modal-close" id="result-modal-close" aria-label="Fechar">&times;</button>
+    <div class="result-modal-body" id="result-modal-body"></div>
+    <div class="result-modal-actions">
+      <a href="index.html#contato" class="btn btn-primary">Falar com a Lucri</a>
+      <a href="index.html#contato" class="btn btn-ghost-dark">Preencher formulário</a>
+    </div>
+  </div>
+</div>
+
 <script src="js/main.js"></script>
 <script>
 const fmt  = (n) => n.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
@@ -419,10 +413,9 @@ function calc() {
   const segmento = sel('segmento');
   const compras  = Math.min(val('compras'), 90);
   const regime   = sel('regime');
-  const area     = document.getElementById('result-area');
 
   if (!fat || !segmento || !regime) {
-    area.innerHTML = '<p class="result-placeholder">Preencha todos os campos para ver a estimativa.</p>';
+    openResultModal('<p class="result-placeholder">Preencha todos os campos para ver a estimativa.</p>');
     return;
   }
 
@@ -446,7 +439,14 @@ function calc() {
   const deltaSign  = delta > 0 ? '+' : '';
   const deltaIcon  = deltaClass === 'up' ? '↑' : deltaClass === 'down' ? '↓' : '≈';
 
-  area.innerHTML = `
+  const messages = {
+    up:   'Sua carga tributária tende a subir com a reforma. A Lucri pode te ajudar a se planejar agora e não deixar isso pesar no caixa da sua empresa.',
+    down: 'Sua carga tributária tende a cair com a reforma! A Lucri pode te ajudar a aproveitar essa folga pra crescer com ainda mais força.',
+    same: 'Sua carga tributária deve ficar praticamente igual. A Lucri pode te ajudar a se preparar pra transição sem sustos.',
+  };
+  const messageClass = deltaClass === 'up' ? 'bad' : deltaClass === 'down' ? 'good' : '';
+
+  const html = `
     <div class="nano-badge ${isNano ? 'yes' : 'no'}">
       ${isNano ? 'Nanoempreendedor — isento de CBS + IBS' : 'Não se enquadra como Nanoempreendedor'}
     </div>
@@ -482,11 +482,13 @@ function calc() {
       Empresas do Simples Nacional têm regras específicas de transição.
       <strong>Consulte um especialista antes de tomar decisões.</strong>
     </p>
+
+    <p class="result-modal-message ${messageClass}">${messages[deltaClass]}</p>
   `;
+  openResultModal(html);
 }
 
-['fat', 'compras'].forEach(id => document.getElementById(id)?.addEventListener('input', calc));
-['segmento', 'regime'].forEach(id => document.getElementById(id)?.addEventListener('change', calc));
+document.getElementById('btn-calcular')?.addEventListener('click', calc);
 </script>
 </body>
 </html>

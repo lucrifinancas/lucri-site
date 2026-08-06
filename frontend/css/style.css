@@ -93,6 +93,32 @@ ul { list-style: none; }
 .btn-ghost-dark { background: transparent; color: var(--text-l); border: 1.5px solid var(--border-l); }
 .btn-ghost-dark:hover { border-color: var(--green-d); color: var(--green-d); }
 .btn-ghost-dark:active { transform: scale(0.98); }
+.btn-sm { padding: 9px 18px; font-size: 0.76rem; }
+.btn-calc { width: 100%; margin-top: 4px; }
+
+.result-modal-overlay { position: fixed; inset: 0; background: rgba(1,1,22,0.55); backdrop-filter: blur(3px); display: none; align-items: center; justify-content: center; z-index: 999; padding: 20px; }
+.result-modal-overlay.active { display: flex; }
+.result-modal { background: #fff; border-radius: 20px; max-width: 440px; width: 100%; padding: 32px; position: relative; box-shadow: 0 20px 60px rgba(0,0,0,0.25); animation: modalIn 0.25s ease; max-height: 88vh; overflow-y: auto; }
+@keyframes modalIn { from { opacity: 0; transform: translateY(12px) scale(0.97); } to { opacity: 1; transform: translateY(0) scale(1); } }
+.result-modal-close { position: absolute; top: 14px; right: 14px; width: 32px; height: 32px; border: none; background: var(--bg); border-radius: 50%; font-size: 1.2rem; line-height: 1; cursor: pointer; color: var(--muted-l); }
+.result-modal-close:hover { background: var(--border-l); }
+.result-modal-body { margin-bottom: 22px; }
+.result-modal-message { font-size: 0.86rem; font-weight: 600; line-height: 1.6; color: var(--text-l); margin-top: 14px; padding-top: 14px; border-top: 1px dashed var(--border-l); }
+.result-modal-message.good { color: var(--green-d); }
+.result-modal-message.bad { color: #dc2626; }
+.result-placeholder { font-size: 0.8rem; color: var(--muted-l); text-align: center; padding: 20px 0; }
+.result-modal-actions { display: flex; gap: 10px; flex-wrap: wrap; }
+.result-modal-actions .btn { flex: 1; }
+@media (max-width: 480px) { .result-modal { padding: 26px 20px; } }
+
+.result-cta { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-top: 16px; padding-top: 16px; border-top: 1px dashed rgba(0,143,84,0.18); flex-wrap: wrap; }
+.result-cta-text { font-size: 0.78rem; font-weight: 600; color: var(--text-l); max-width: 260px; line-height: 1.5; }
+.result-cta-actions { display: flex; gap: 8px; flex-shrink: 0; }
+@media (max-width: 480px) {
+  .result-cta { flex-direction: column; align-items: flex-start; }
+  .result-cta-actions { width: 100%; }
+  .result-cta-actions .btn { flex: 1; }
+}
 
 /* ============================================================
    NAV
@@ -547,7 +573,7 @@ ul { list-style: none; }
 .sobre-actions { display: flex; gap: 12px; margin-top: 36px; flex-wrap: wrap; }
 
 .sobre-visual {
-  border-radius: 16px;
+  border-radius: 15px;
   border: 1px solid var(--border);
   overflow: hidden;
   aspect-ratio: 4/3;

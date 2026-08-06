@@ -125,13 +125,7 @@
           <label>Novos clientes no período</label>
           <div class="calc-input-wrap"><input type="number" id="cac-clientes" placeholder="8" min="1" /><span class="calc-suffix">clientes</span></div>
         </div>
-      </div>
-      <div class="ferr-calc-result">
-        <div class="result-row">
-          <span class="result-label">Custo por Cliente (CAC)</span>
-          <span class="result-val" id="cac-result">R$ —</span>
-        </div>
-        <p class="result-note">Para ser sustentável, o CAC precisa ser menor que o valor que cada cliente gera no longo prazo (LTV).</p>
+        <button type="button" id="cac-btn-calcular" class="btn btn-primary btn-calc">Calcular</button>
       </div>
     </div>
   </div>
@@ -156,21 +150,6 @@
   </div>
 </section>
 
-<section class="ferr-cta">
-  <div class="container">
-    <div class="ferr-cta-inner">
-      <div class="ferr-cta-text">
-        <h2>O CAC ficou mais alto<br />do que deveria?</h2>
-        <p>Se o resultado preocupou ou você quer entender como reduzir o custo de aquisição sem cortar investimentos — a Lucri está aqui para ajudar. Fale com a gente.</p>
-      </div>
-      <div class="ferr-cta-actions">
-        <a href="index.html#contato" class="btn btn-primary">Falar com a Lucri</a>
-        <a href="ferramentas.html" class="btn btn-ghost">Ver todas as ferramentas</a>
-      </div>
-    </div>
-  </div>
-</section>
-
 <footer>
   <div class="container">
     <div class="footer-top">
@@ -183,16 +162,38 @@
   </div>
 </footer>
 
+<div class="result-modal-overlay" id="result-modal-overlay">
+  <div class="result-modal">
+    <button class="result-modal-close" id="result-modal-close" aria-label="Fechar">&times;</button>
+    <div class="result-modal-body" id="result-modal-body"></div>
+    <div class="result-modal-actions">
+      <a href="index.html#contato" class="btn btn-primary">Falar com a Lucri</a>
+      <a href="index.html#contato" class="btn btn-ghost-dark">Preencher formulário</a>
+    </div>
+  </div>
+</div>
+
 <script src="js/main.js"></script>
 <script>
 const fmt = (n) => n.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
 const val = (id) => parseFloat(document.getElementById(id)?.value) || 0;
 function calcCAC() {
   const invest = val('cac-invest'), clientes = val('cac-clientes');
-  document.getElementById('cac-result').textContent = (invest > 0 && clientes > 0)
-    ? fmt(invest / clientes) : 'R$ —';
+  if (invest <= 0 || clientes <= 0) {
+    openResultModal('<p class="result-placeholder">Preencha os campos para calcular.</p>');
+    return;
+  }
+  const html = `
+    <div class="result-row">
+      <span class="result-label">Custo por Cliente (CAC)</span>
+      <span class="result-val">${fmt(invest / clientes)}</span>
+    </div>
+    <p class="result-note">Para ser sustentável, o CAC precisa ser menor que o valor que cada cliente gera no longo prazo (LTV).</p>
+    <p class="result-modal-message">Quer entender o que fazer com esse número? A Lucri te ajuda a agir sobre ele.</p>
+  `;
+  openResultModal(html);
 }
-['cac-invest', 'cac-clientes'].forEach(id => document.getElementById(id)?.addEventListener('input', calcCAC));
+document.getElementById('cac-btn-calcular')?.addEventListener('click', calcCAC);
 </script>
 </body>
 </html>
