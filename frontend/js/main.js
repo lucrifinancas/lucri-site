@@ -95,11 +95,17 @@ if (form) {
     const faturamento = form.faturamento?.value      || '';
     const mensagem    = form.mensagem?.value.trim()  || '';
 
+    const utm = window.lucriUtm || {};
+    const origem = utm.utm_source
+      ? `Origem: ${[utm.utm_source, utm.utm_medium, utm.utm_campaign].filter(Boolean).join(' / ')}`
+      : '';
+
     const texto = [
       `Olá, me chamo *${nome}*`,
       empresa       ? `Empresa: *${empresa}*`           : '',
       faturamento   ? `Faturamento: *${faturamento}*`   : '',
       mensagem      ? `\n${mensagem}`                   : '',
+      origem        ? `\n_${origem}_`                   : '',
     ].filter(Boolean).join('\n');
 
     window.open(
