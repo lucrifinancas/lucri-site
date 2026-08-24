@@ -1044,7 +1044,12 @@ footer { border-top: 1px solid var(--border); padding: 48px 0 32px; background: 
   padding: 40px 0;
   border-bottom: 1px solid var(--border-l);
   align-items: center;
+  color: inherit;
+  text-decoration: none;
+  transition: opacity 0.15s ease;
 }
+.depoimento:hover,
+.depoimento:focus-visible { opacity: 0.72; }
 .depo-quote {
   font-size: 1rem;
   color: var(--text-l);
