@@ -1,0 +1,15 @@
+/* Menu do site — um estilo só para todas as páginas (15/10/2026).
+   Carregado logo depois de style.css. Antes cada página tinha sua variação
+   (home em redesign-home.css, ferramentas em ferramentas.css/ferramenta.css). */
+
+/* Mesma largura de conteúdo em todo o site (a home já usava 1280px). */
+:root { --max: 1280px; }
+.nav { border-bottom: 1px solid #ffffff14; }
+.nav-links a { font-size: 14px; font-weight: 500; color: #c3c6d4; }
+.nav-links a:hover, .nav-links a.active { color: #fff; }
+.nav-links a:focus-visible, .nav-cta .btn:focus-visible { outline: 2px solid #00EB85; outline-offset: 4px; border-radius: 4px; }
+.nav .nav-cta .btn { border-radius: 100px; padding: 11px 22px; }
+@media (min-width: 981px) and (max-width: 1150px) {
+  .nav-links { gap: 16px; }
+  .nav-menu { gap: 18px; }
+}

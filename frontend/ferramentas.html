@@ -36,6 +36,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;600;700&family=Montserrat:wght@700;800;900&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/nav.css?v=3" />
+  <link rel="stylesheet" href="css/ferramentas.css?v=3" />
   <style>
     .tools-hero {
       min-height: 44vh; padding: 140px 0 72px;
@@ -216,101 +218,98 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </nav>
 </nav>
 
-<section class="tools-hero">
-  <div class="tools-hero-bg"></div>
-  <div class="tools-hero-overlay"></div>
-  <div class="tools-hero-content">
-    <div class="container">
-      <div class="tools-badge">Gratuito</div>
-      <h1 class="tools-hero-title">
-        Ferramentas para<br /><span class="hl">empreendedores</span>
-      </h1>
-      <p class="tools-hero-sub">
-        Calculadoras financeiras prontas para usar. Sem cadastro, sem complicação — só os números que você precisa para decidir melhor.
-      </p>
+<section class="ft-hero">
+  <div class="container ft-hero-grid">
+    <div class="ft-hero-texto">
+      <span class="ft-eyebrow">Ferramentas gratuitas</span>
+      <h1 class="ft-titulo">Boas decisões começam com <span class="ft-hl">números claros.</span></h1>
+      <p class="ft-sub">Quanto cobrar? Quanto vender? Dá para contratar? Use as calculadoras da Lucri para dar o próximo passo com mais clareza.</p>
+      <a href="#calculadoras" class="btn btn-primary ft-botao">Encontrar minha ferramenta <span aria-hidden="true">↓</span></a>
+      <p class="ft-apoio">7 ferramentas gratuitas. Resultados na hora.</p>
+    </div>
+
+    <div class="ft-preview" aria-label="Exemplo ilustrativo da calculadora de ponto de equilíbrio">
+      <div class="ft-preview-topo">
+        <span class="ft-preview-ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/><line x1="2" y1="20" x2="22" y2="20"/></svg></span>
+        <div><strong>Ponto de equilíbrio</strong><small>Calculadora Lucri</small></div>
+        <span class="ft-selo-ex">Exemplo ilustrativo</span>
+      </div>
+      <div class="ft-campos">
+        <div class="ft-campo"><span>Custos fixos mensais</span><b>R$ 12.000</b></div>
+        <div class="ft-campo"><span>Margem de contribuição</span><b>40%</b></div>
+      </div>
+      <div class="ft-resultado">
+        <span>Ponto de equilíbrio mensal</span>
+        <b>R$ 30.000</b>
+        <small>R$ 12.000 ÷ 40% = faturamento mínimo para não ter prejuízo</small>
+      </div>
+      <a href="ferramenta-ponto-equilibrio.html" class="ft-preview-link">Calcular com meus dados <span aria-hidden="true">→</span></a>
     </div>
   </div>
 </section>
 
-<section class="tools-dir">
+<section class="ft-lista" id="calculadoras">
   <div class="container">
-    <div class="tools-dir-header">
+    <div class="ft-lista-topo">
       <div>
-        <h2>Calculadoras financeiras</h2>
-        <p>Selecione uma ferramenta para começar. O resultado aparece na hora, sem cadastro.</p>
+        <h2>O que você precisa descobrir?</h2>
+        <p>Escolha a pergunta do seu momento. O resultado aparece na hora, sem cadastro.</p>
       </div>
-      <div class="tools-dir-num">07</div>
+      <span class="ft-selo">7 ferramentas gratuitas</span>
     </div>
-    <div class="tools-dir-grid">
 
-      <a href="ferramenta-reforma-tributaria.html" class="tool-card tool-card-new">
-        <div class="tool-card-badge">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="8" y1="13" x2="16" y2="13"/><line x1="8" y1="17" x2="13" y2="17"/></svg>
+    <div class="ft-grade">
+      <a href="ferramenta-reforma-tributaria.html" class="ft-card ft-destaque">
+        <span class="ft-ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="8" y1="13" x2="16" y2="13"/><line x1="8" y1="17" x2="13" y2="17"/></svg></span>
+        <div class="ft-destaque-texto">
+          <span class="ft-nome">Em destaque <span class="ft-novo">Novo</span></span>
+          <h3 class="ft-pergunta">Simulador da Reforma Tributária (CBS + IBS)</h3>
+          <p class="ft-desc">Estime o impacto do novo sistema tributário no seu negócio e compare com a carga atual.</p>
         </div>
-        <div class="tool-card-new-body">
-          <h2 class="tool-card-title">Simulador da Reforma Tributária (CBS + IBS)</h2>
-          <p class="tool-card-desc">Estime o impacto do novo sistema tributário no seu negócio e compare com a carga atual. Baseado na alíquota máxima de 26,5% em vigor a partir de 2026.</p>
-          <span class="tool-card-cta" style="margin-top:8px;">Simular agora →</span>
-        </div>
-        <div class="tool-card-new-right">
-          <span class="tool-new-pill">Novo</span>
-        </div>
+        <span class="ft-cta">Simular agora <span aria-hidden="true">→</span></span>
       </a>
-
-      <a href="ferramenta-ponto-equilibrio.html" class="tool-card">
-        <div class="tool-card-badge">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/><line x1="2" y1="20" x2="22" y2="20"/></svg>
-        </div>
-        <h2 class="tool-card-title">Calculadora de Ponto de Equilíbrio</h2>
-        <p class="tool-card-desc">Descubra qual é o faturamento mínimo para cobrir todos os custos da empresa sem entrar no prejuízo. Planeje suas metas com base em dados reais.</p>
-        <span class="tool-card-cta">Calcular agora →</span>
+      <a href="ferramenta-ponto-equilibrio.html" class="ft-card">
+        <span class="ft-ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/><line x1="2" y1="20" x2="22" y2="20"/></svg></span>
+        <span class="ft-nome">Ponto de equilíbrio</span>
+        <h3 class="ft-pergunta">Quanto preciso vender para não ter prejuízo?</h3>
+        <p class="ft-desc">Descubra o faturamento mínimo para cobrir todos os custos da empresa e planeje suas metas com base em dados reais.</p>
+        <span class="ft-cta">Calcular agora <span aria-hidden="true">→</span></span>
       </a>
-
-      <a href="ferramenta-margem-lucro.html" class="tool-card">
-        <div class="tool-card-badge">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
-        </div>
-        <h2 class="tool-card-title">Calculadora de Margem de Lucro</h2>
-        <p class="tool-card-desc">Calcule quanto do seu faturamento realmente sobra depois de pagar todos os custos. Entenda se o negócio está sendo lucrativo de verdade.</p>
-        <span class="tool-card-cta">Calcular agora →</span>
+      <a href="ferramenta-margem-lucro.html" class="ft-card">
+        <span class="ft-ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg></span>
+        <span class="ft-nome">Margem de lucro</span>
+        <h3 class="ft-pergunta">Quanto realmente sobra das minhas vendas?</h3>
+        <p class="ft-desc">Calcule quanto do faturamento sobra depois de pagar todos os custos e entenda se o negócio é lucrativo de verdade.</p>
+        <span class="ft-cta">Calcular agora <span aria-hidden="true">→</span></span>
       </a>
-
-      <a href="ferramenta-markup.html" class="tool-card">
-        <div class="tool-card-badge">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg>
-        </div>
-        <h2 class="tool-card-title">Calculadora de Markup e Precificação</h2>
-        <p class="tool-card-desc">Defina o preço ideal de venda para cobrir custos e garantir a margem desejada. Chega de precificar no chute ou copiar a concorrência.</p>
-        <span class="tool-card-cta">Calcular agora →</span>
+      <a href="ferramenta-markup.html" class="ft-card">
+        <span class="ft-ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg></span>
+        <span class="ft-nome">Markup e precificação</span>
+        <h3 class="ft-pergunta">Qual preço devo cobrar pelo meu produto?</h3>
+        <p class="ft-desc">Defina o preço de venda que cobre os custos e garante a margem desejada. Chega de precificar no chute.</p>
+        <span class="ft-cta">Calcular agora <span aria-hidden="true">→</span></span>
       </a>
-
-      <a href="ferramenta-capital-giro.html" class="tool-card">
-        <div class="tool-card-badge">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg>
-        </div>
-        <h2 class="tool-card-title">Calculadora de Capital de Giro</h2>
-        <p class="tool-card-desc">Descubra quanto dinheiro a empresa precisa ter disponível para operar sem apertar o caixa. Essencial para crescer com segurança financeira.</p>
-        <span class="tool-card-cta">Calcular agora →</span>
+      <a href="ferramenta-capital-giro.html" class="ft-card">
+        <span class="ft-ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg></span>
+        <span class="ft-nome">Capital de giro</span>
+        <h3 class="ft-pergunta">Quanto preciso ter disponível no caixa?</h3>
+        <p class="ft-desc">Descubra quanto dinheiro a empresa precisa ter para operar sem apertar o caixa e crescer com segurança.</p>
+        <span class="ft-cta">Calcular agora <span aria-hidden="true">→</span></span>
       </a>
-
-      <a href="ferramenta-cac.html" class="tool-card">
-        <div class="tool-card-badge">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="4"/><line x1="12" y1="2" x2="12" y2="8"/><line x1="12" y1="16" x2="12" y2="22"/><line x1="2" y1="12" x2="8" y2="12"/><line x1="16" y1="12" x2="22" y2="12"/></svg>
-        </div>
-        <h2 class="tool-card-title">Calculadora de CAC</h2>
-        <p class="tool-card-desc">Calcule quanto você investe para conquistar cada novo cliente. Otimize sua estratégia de marketing e vendas com dados reais, não com suposições.</p>
-        <span class="tool-card-cta">Calcular agora →</span>
+      <a href="ferramenta-cac.html" class="ft-card">
+        <span class="ft-ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="4"/><line x1="12" y1="2" x2="12" y2="8"/><line x1="12" y1="16" x2="12" y2="22"/><line x1="2" y1="12" x2="8" y2="12"/><line x1="16" y1="12" x2="22" y2="12"/></svg></span>
+        <span class="ft-nome">CAC</span>
+        <h3 class="ft-pergunta">Quanto custa conquistar cada cliente?</h3>
+        <p class="ft-desc">Calcule quanto você investe para conquistar cada novo cliente e ajuste marketing e vendas com dados reais.</p>
+        <span class="ft-cta">Calcular agora <span aria-hidden="true">→</span></span>
       </a>
-
-      <a href="ferramenta-custo-funcionario.html" class="tool-card">
-        <div class="tool-card-badge">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-        </div>
-        <h2 class="tool-card-title">Calculadora de Custo Real do Funcionário</h2>
-        <p class="tool-card-desc">Saiba o custo total de uma contratação CLT — muito além do salário combinado. Evite surpresas no momento de contratar.</p>
-        <span class="tool-card-cta">Calcular agora →</span>
+      <a href="ferramenta-custo-funcionario.html" class="ft-card">
+        <span class="ft-ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></span>
+        <span class="ft-nome">Custo do funcionário</span>
+        <h3 class="ft-pergunta">Quanto custa contratar um funcionário?</h3>
+        <p class="ft-desc">Saiba o custo total de uma contratação CLT, muito além do salário combinado, e evite surpresas.</p>
+        <span class="ft-cta">Calcular agora <span aria-hidden="true">→</span></span>
       </a>
-
     </div>
   </div>
 </section>

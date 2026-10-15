@@ -36,6 +36,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;600;700&family=Montserrat:wght@700;800;900&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="css/style.css?v=2" />
+  <link rel="stylesheet" href="css/nav.css?v=3" />
+  <link rel="stylesheet" href="css/redesign-home.css?v=3" />
   <script type="text/javascript">
     (function(c,l,a,r,i,t,y){
         c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
@@ -44,7 +46,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     })(window, document, "clarity", "script", "y1d2wmlvhv");
   </script>
 </head>
-<body>
+<body class="redesign-home">
 <!-- Google Tag Manager (noscript) -->
 <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WXTMJP2L"
 height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
@@ -66,7 +68,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <div class="nav-cta">
         <a href="#contato" class="btn btn-ghost">Fale conosco</a>
       </div>
-      <button class="nav-hamburger" id="hamburger" aria-label="Menu">
+      <button class="nav-hamburger" id="hamburger" aria-label="Abrir menu" aria-expanded="false" aria-controls="drawer">
         <span></span><span></span><span></span>
       </button>
     </div>
@@ -92,15 +94,19 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <div class="container">
       <div class="hero-inner">
         <div class="hero-text reveal">
-          <h1 class="hero-title">Clareza financeira pra crescer <span class="hl">sem medo de quebrar</span>.</h1>
+          <span class="hero-eyebrow">FINANÇAS CORPORATIVAS · PARA PMEs</span>
+          <h1 class="hero-title">Sua empresa pode crescer.<br><span class="hl">Com clareza.<br>Com direção.</span></h1>
           <p class="hero-sub">A Lucri organiza e executa o financeiro da sua empresa pra você parar de decidir no achismo e começar a crescer com estratégia.</p>
           <div class="hero-actions">
-            <a href="#empresa" class="btn btn-ghost">Conheça a empresa</a>
-            <a href="#contato" class="btn btn-primary">Contato</a>
+            <a href="#contato" class="btn btn-primary">Quero organizar meu financeiro <span aria-hidden="true">↗</span></a>
+            <a href="#servicos" class="hero-secondary">Conheça nossas soluções <span aria-hidden="true">↓</span></a>
           </div>
+          <p class="hero-note">BPO financeiro · Controladoria · Consultoria</p>
         </div>
         <div class="hero-photo reveal d2">
-          <img src="images/founders.png" alt="Guilherme e Izabelle Carvalho, sócios da Lucri" />
+          <img src="images/founders.png" alt="Guilherme e Izabelle Carvalho, sócios da Lucri" fetchpriority="high" />
+          <div class="photo-caption"><span>Guilherme e Izabelle</span><small>Sócios. Empreendedores. Seus parceiros.</small></div>
+          <div class="hero-proof"><span class="proof-dot" aria-hidden="true"></span><div><strong>+100 empresas</strong><small>já fizeram parte dessa história</small></div></div>
         </div>
       </div>
     </div>
@@ -136,8 +142,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <div class="dores-grid">
 
       <div class="dores-intro reveal">
-        <h2 class="title-l">Isso soa<br>familiar?</h2>
-        <p class="dores-sub">Se você respondeu sim para alguma dessas frases, o problema não é o mercado ou azar. É gestão financeira.</p>
+        <span class="eyebrow-l">O FINANCEIRO NÃO PRECISA PESAR</span>
+        <h2 class="title-l">Sua empresa vende.<br>Mas o dinheiro<br>não aparece?</h2>
+        <p class="dores-sub">Quando os números não estão claros, toda decisão pesa mais. Você se reconhece em alguma dessas situações?</p>
       </div>
 
       <div class="dor-list reveal d1">

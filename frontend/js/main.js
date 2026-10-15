@@ -49,11 +49,15 @@ const drawer    = document.getElementById('drawer');
 hamburger.addEventListener('click', () => {
   const open = hamburger.classList.toggle('open');
   drawer.classList.toggle('open', open);
+  hamburger.setAttribute('aria-expanded', String(open));
+  hamburger.setAttribute('aria-label', open ? 'Fechar menu' : 'Abrir menu');
 });
 drawer.querySelectorAll('a').forEach((a) => {
   a.addEventListener('click', () => {
     hamburger.classList.remove('open');
     drawer.classList.remove('open');
+    hamburger.setAttribute('aria-expanded', 'false');
+    hamburger.setAttribute('aria-label', 'Abrir menu');
   });
 });
 
@@ -115,3 +119,14 @@ if (form) {
     );
   });
 }
+
+/* Fechamento do menu por teclado */
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape' && drawer.classList.contains('open')) {
+    drawer.classList.remove('open');
+    hamburger.classList.remove('open');
+    hamburger.setAttribute('aria-expanded', 'false');
+    hamburger.setAttribute('aria-label', 'Abrir menu');
+    hamburger.focus();
+  }
+});
