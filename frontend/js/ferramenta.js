@@ -21,6 +21,22 @@
   const nomeBotao = botao.textContent.trim();
   let temResultado = false;
 
+  // ---------- medição (GTM / dataLayer) ----------
+  // Só nome da ferramenta, caminho e tipo de erro. Nunca valores digitados nem dados pessoais.
+  const calculadora = card.dataset.fxNome || '';
+  function evento(nome, extra) {
+    window.dataLayer = window.dataLayer || [];
+    window.dataLayer.push(Object.assign({ event: nome, calculator_name: calculadora, page_path: location.pathname }, extra || {}));
+  }
+  let iniciou = false;
+  const marcarInicio = () => { if (!iniciou) { iniciou = true; evento('calculator_start'); } };
+  card.addEventListener('input', marcarInicio, true);
+  card.addEventListener('change', marcarInicio, true);
+  painel.addEventListener('click', e => {
+    const cta = e.target.closest('[data-fx-cta]');
+    if (cta) evento('calculator_cta_click', { cta_location: cta.dataset.fxCta });
+  });
+
   const esc = s => String(s ?? '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
   const num = n => Number(n).toLocaleString('pt-BR', { maximumFractionDigits: 2 });
   const rotuloDe = el => (card.querySelector(`label[for="${el.id}"]`)?.textContent || '').trim();
@@ -66,6 +82,7 @@
     mostrarErroGeral('');
     const invalido = validar();
     if (invalido) {
+      evento('calculator_error', { error_type: invalido.value.trim() === '' ? 'campo_vazio' : 'valor_fora_da_faixa' });
       e.stopPropagation();
       e.preventDefault();
       invalido.focus();
@@ -155,6 +172,7 @@
     d.innerHTML = html;
     // A página recusou os dados (ex.: percentuais que somam 100%): erro perto do botão.
     if (d.querySelector('.result-placeholder') && !d.querySelector('.result-row, .result-col')) {
+      evento('calculator_error', { error_type: 'regra_da_ferramenta' });
       mostrarErroGeral(d.querySelector('.result-placeholder').textContent.trim());
       anunciar(erroGeral.textContent);
       return;
@@ -169,10 +187,11 @@
         <div class="fx-res-conteudo fx-bloqueio">${bloqueio.innerHTML}</div>
         <div class="fx-proximo">
           <p>Quer simular o seu caso com quem entende do assunto?</p>
-          <a href="index.html#contato" class="btn btn-primary fx-btn-cta">Conversar com a Lucri</a>
+          <a href="index.html#contato" class="btn btn-primary fx-btn-cta" data-fx-cta="painel_resultado">Quero a Lucri na minha empresa</a>
         </div>`;
       painel.classList.remove('desatualizado', 'vazio');
       temResultado = true;
+      evento('calculator_error', { error_type: 'cenario_nao_suportado' });
       anunciar('Estimativa indisponível para esse cenário. ' + bloqueio.textContent.trim().slice(0, 160));
       return;
     }
@@ -192,10 +211,11 @@
       </div>
       <div class="fx-proximo">
         <p>Quer transformar esses números em decisões para sua empresa?</p>
-        <a href="index.html#contato" class="btn btn-primary fx-btn-cta">Conversar com a Lucri</a>
+        <a href="index.html#contato" class="btn btn-primary fx-btn-cta" data-fx-cta="painel_resultado">Quero a Lucri na minha empresa</a>
       </div>`;
     painel.classList.remove('desatualizado', 'vazio');
     temResultado = true;
+    evento('calculator_submit');
     anunciar(`Resultado atualizado. ${p.rot}: ${p.val}.`);
     // No celular o painel fica abaixo do formulário: traz o resultado para a tela.
     const topo = painel.getBoundingClientRect().top;

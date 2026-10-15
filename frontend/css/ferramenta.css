@@ -187,3 +187,22 @@ body .footer-col ul li a:hover, body .footer-bottom a:hover { color: #fff; text-
 .fx-bloqueio p + p { margin-top: 10px; }
 .fx-leitura ul { margin: 8px 0 0; padding-left: 18px; list-style: disc; font-size: 14px; line-height: 1.7; color: var(--fx-texto-2); }
 .fx-leitura li b { color: var(--fx-texto); font-weight: 600; font-variant-numeric: tabular-nums; }
+
+/* ---------- SEO: trilha, pergunta, guia (15/10/2026) ---------- */
+.fx-trilha ol { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 0; margin: 0 0 12px; padding: 0; list-style: none; font-size: 14px; color: #c3c6d4; }
+.fx-trilha li + li::before { content: '›'; margin: 0 8px; color: #8a8fa6; }
+.fx-trilha a { display: inline-flex; align-items: center; min-height: 32px; color: #c3c6d4; text-decoration: underline; text-decoration-color: transparent; text-underline-offset: 4px; }
+.fx-trilha a:hover, .fx-trilha a:focus-visible { color: #fff; text-decoration-color: currentColor; }
+.fx-trilha a:focus-visible { outline: 2px solid var(--fx-verde); outline-offset: 2px; border-radius: 4px; }
+.fx-trilha [aria-current] { color: #fff; font-weight: 600; }
+.fx-pergunta { font-size: 18px; font-weight: 500; color: var(--fx-verde); margin-bottom: 8px; }
+.fx-guia-titulo { font-family: var(--font); font-size: clamp(26px, 2.4vw, 32px); font-weight: 600; letter-spacing: -.035em; color: var(--fx-texto); margin-bottom: 20px; }
+.fx-explica + .fx-explica { margin-top: 0; }
+.fx-explica-card ul, .fx-explica-card ol { margin: 4px 0 0; padding-left: 22px; display: grid; gap: 8px; font-size: 16px; line-height: 1.65; color: var(--fx-texto-2); }
+.fx-explica-card ul { list-style: disc; }
+.fx-explica-card ol { list-style: decimal; }
+.fx-explica-card .fx-formula + ul { margin-top: 12px; }
+.fx-cheio { margin-bottom: 20px; }
+.fx-saiba-mais { font-size: 18px; font-weight: 600; color: var(--fx-texto); margin: 28px 0 0; }
+.fx-rel-artigo { grid-template-columns: minmax(0, 1fr) auto; }
+.fx-revisao { margin-top: 20px; font-size: 14px; color: var(--fx-texto-2); }

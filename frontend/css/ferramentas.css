@@ -117,3 +117,10 @@ body .footer-bottom p, body .footer-bottom a { font-size: 13px; color: #9ea2b6; 
 body .footer-col ul li a:hover, body .footer-bottom a:hover { color: #fff; text-decoration: underline; text-underline-offset: 4px; }
 
 @media (prefers-reduced-motion: reduce) { .ft-card, .ft-cta, .ft-cta > span { transition: none; } .ft-card:hover { transform: none; } .ft-card:hover .ft-cta > span { transform: none; } }
+
+/* conteúdos de apoio (SEO, 15/10/2026) */
+.ft-conteudos { background: #fff; padding: 64px 0; }
+.ft-conteudos h2 { font-family: var(--font); font-size: clamp(24px, 2.4vw, 32px); font-weight: 600; letter-spacing: -.035em; color: var(--ft-texto); margin-bottom: 16px; }
+.ft-conteudos ul { list-style: none; padding: 0; display: grid; gap: 10px; margin-bottom: 18px; }
+.ft-conteudos li a, .ft-conteudos-todos { font-size: 16px; font-weight: 600; color: var(--ft-verde-texto); text-decoration: underline; text-underline-offset: 4px; }
+.ft-conteudos a:focus-visible { outline: 3px solid var(--ft-azul); outline-offset: 3px; border-radius: 4px; }

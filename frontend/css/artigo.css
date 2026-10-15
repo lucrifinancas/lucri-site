@@ -1,0 +1,37 @@
+/* Artigos e listagem de conteúdos (15/10/2026). Usa as variáveis e o topo de ferramenta.css. */
+.ar-estreito { max-width: 820px; }
+.ar-hero .fx-titulo { font-size: clamp(30px, 3.6vw, 44px); }
+.ar-principal { background: #fff; padding: 48px 0 72px; }
+.ar-texto { color: var(--fx-texto-2); }
+.ar-texto h2 { font-family: var(--font); font-size: clamp(22px, 2.2vw, 28px); font-weight: 600; letter-spacing: -.03em; line-height: 1.25; color: var(--fx-texto); margin: 40px 0 12px; }
+.ar-texto p, .ar-texto li { font-size: 17px; line-height: 1.75; }
+.ar-texto p + p { margin-top: 14px; }
+.ar-texto ul { list-style: disc; padding-left: 22px; display: grid; gap: 8px; margin: 12px 0; }
+.ar-texto strong { color: var(--fx-texto); }
+.ar-texto a:not(.btn) { color: var(--fx-verde-texto); font-weight: 600; text-decoration: underline; text-underline-offset: 3px; }
+.ar-texto a:not(.btn):focus-visible { outline: 2px solid var(--fx-azul); outline-offset: 2px; border-radius: 3px; }
+.ar-resposta { padding: 18px 20px; border-radius: 14px; background: var(--fx-claro); border: 1px solid var(--fx-borda); }
+.ar-calc { margin: 32px 0; padding: 22px; border-radius: 16px; background: var(--fx-azul); color: #fff; display: grid; gap: 8px; justify-items: start; }
+.ar-calc-rot { font-size: 13px; font-weight: 600; letter-spacing: .04em; color: var(--fx-verde); }
+.ar-calc .ar-calc-txt { font-size: 16px; line-height: 1.6; color: #c3c6d4; }
+.ar-calc-btn { border-radius: 100px; margin-top: 6px; }
+.ar-cta { margin-top: 48px; padding: 28px; border-radius: 20px; border: 1px solid var(--fx-borda); background: var(--fx-claro); }
+.ar-cta h2 { margin-top: 0; }
+.ar-cta .btn { border-radius: 100px; margin-top: 16px; }
+.ar-relacionados { margin-top: 32px; }
+.ar-relacionados h2 { font-size: 20px; margin: 0 0 10px; }
+.ar-relacionados ul { list-style: none; padding: 0; display: grid; gap: 6px; }
+.ar-btn-foco, .ar-calc .btn:focus-visible, .ar-cta .btn:focus-visible { outline: 3px solid var(--fx-verde); outline-offset: 3px; }
+
+.ar-lista { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+.ar-card { display: flex; flex-direction: column; gap: 10px; padding: 24px; border: 1px solid var(--fx-borda); border-radius: 18px; background: #fff; color: var(--fx-texto); transition: border-color .15s ease; }
+.ar-card:hover { border-color: #b9bbb3; }
+.ar-card:focus-visible { outline: 3px solid var(--fx-azul); outline-offset: 3px; }
+.ar-card h2 { font-family: var(--font); font-size: 20px; font-weight: 600; letter-spacing: -.02em; line-height: 1.3; }
+.ar-card p { font-size: 15px; line-height: 1.6; color: var(--fx-texto-2); }
+.ar-card-ler { margin-top: auto; padding-top: 8px; font-size: 15px; font-weight: 600; }
+.ar-lista-rodape { margin-top: 24px; font-size: 16px; color: var(--fx-texto-2); }
+.ar-lista-rodape a { color: var(--fx-verde-texto); font-weight: 600; text-decoration: underline; text-underline-offset: 3px; }
+@media (max-width: 900px) { .ar-lista { grid-template-columns: minmax(0, 1fr); } }
+@media (max-width: 640px) { .ar-texto p, .ar-texto li { font-size: 16px; } .ar-calc .btn, .ar-cta .btn { width: 100%; justify-content: center; } }
+@media (prefers-reduced-motion: reduce) { .ar-card { transition: none; } }
